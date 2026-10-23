@@ -1,0 +1,4 @@
+.stagecraft-status .window-content { background: #202329; color: #e5e7eb; }
+.stagecraft-status-content { padding: 1rem; line-height: 1.55; }
+.stagecraft-status-content dl { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; }
+.stagecraft-status-content dd { margin: 0; overflow-wrap: anywhere; }

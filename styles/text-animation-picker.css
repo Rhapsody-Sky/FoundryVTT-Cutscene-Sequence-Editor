@@ -1,0 +1,16 @@
+.stagecraft-editor .stagecraft-text-animation-enhanced > label.stagecraft-text-animation-select { display:none; }
+.stagecraft-text-animation-picker { display:flex; flex-direction:column; gap:6px; min-width:0; }
+.stagecraft-editor .stagecraft-text-animation-toggle { display:flex; align-items:center; gap:8px; width:100%; min-height:50px; height:auto; text-align:left; }
+.stagecraft-text-animation-summary-preview { display:block; flex:0 0 88px; width:88px; height:44px; overflow:hidden; border-radius:3px; background:#111; }
+.stagecraft-text-animation-summary-preview svg,.stagecraft-text-animation-miniature svg { display:block; width:100%; height:100%; }
+.stagecraft-text-animation-summary-preview > .stagecraft-text-animation-miniature { height:100%; }
+.stagecraft-text-animation-summary-label { order:1; flex:1; min-width:0; overflow-wrap:anywhere; }
+.stagecraft-text-animation-toggle-action { order:2; flex:none; font-size:11px; opacity:0.8; }
+.stagecraft-text-animation-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-auto-rows:max-content; align-content:start; gap:6px; max-height:400px; overflow:auto; padding:3px; }
+.stagecraft-editor .stagecraft-text-animation-choice { display:flex; flex-direction:column; align-items:stretch; width:100%; height:auto; min-width:0; margin:0; padding:4px; border:2px solid transparent; border-radius:5px; text-align:left; }
+.stagecraft-editor .stagecraft-text-animation-choice[aria-selected="true"] { border-color:var(--stagecraft-accent,#a8e8ed); box-shadow:0 0 0 1px var(--stagecraft-accent,#a8e8ed); }
+.stagecraft-text-animation-choice[aria-selected="true"] .stagecraft-text-animation-choice-label::before { content:'✓ '; }
+.stagecraft-text-animation-choice:focus-visible,.stagecraft-text-animation-toggle:focus-visible { outline:2px solid var(--color-warm-2,#e7a63c); outline-offset:2px; }
+.stagecraft-text-animation-miniature { position:relative; display:block; width:100%; height:66px; overflow:hidden; border-radius:2px; background:#111; }
+.stagecraft-text-animation-choice-label { order:1; min-height:28px; padding:5px 0 2px; font-size:11px; line-height:1.2; overflow-wrap:anywhere; }
+.stagecraft-text-animation-grid[hidden],.stagecraft-text-animation-summary-preview[hidden] { display:none; }

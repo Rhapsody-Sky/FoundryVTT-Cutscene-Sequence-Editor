@@ -1,0 +1,107 @@
+.stagecraft-playback-volume {
+  position: fixed;
+  z-index: 100000;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  box-sizing: border-box;
+  width: min(18rem, calc(100vw - 2rem));
+  min-width: min(11rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
+  max-height: 3rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  background: rgb(13 15 20 / 90%);
+  color: #f5f5f5;
+  pointer-events: auto;
+  box-shadow: 0 0.35rem 1.4rem rgb(0 0 0 / 35%);
+  backdrop-filter: blur(12px);
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.stagecraft-playback-controls.stagecraft-playback-controls-with-volume {
+  bottom: 76px;
+  max-height: calc(100vh - 88px);
+}
+
+.stagecraft-playback-volume.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.55rem);
+}
+
+.stagecraft-playback-volume__slider[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  flex: 1 1 10rem;
+  width: clamp(8rem, 22vw, 14rem);
+  min-width: 7rem;
+  height: 1rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.stagecraft-playback-volume__slider[type="range"]:focus-visible {
+  outline: 2px solid #91b9ff;
+  outline-offset: 4px;
+}
+
+.stagecraft-playback-volume__slider[type="range"]::-webkit-slider-runnable-track {
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 32%);
+}
+
+.stagecraft-playback-volume__slider[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: -0.325rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #6197ff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 40%);
+}
+
+.stagecraft-playback-volume__slider[type="range"]::-moz-range-track {
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 32%);
+}
+
+.stagecraft-playback-volume__slider[type="range"]::-moz-range-thumb {
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #6197ff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 40%);
+}
+
+.stagecraft-playback-volume__value {
+  flex: 0 0 3ch;
+  color: inherit;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagecraft-playback-volume {
+    transition: none;
+  }
+}

@@ -1,0 +1,39 @@
+.stagecraft-button-control {
+  font: inherit;
+  color: inherit;
+  text-align: center;
+  white-space: normal;
+  line-height: 1.15;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stagecraft-button-control::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: '';
+  border-radius: inherit;
+  clip-path: inherit;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 90ms ease-out;
+}
+
+.stagecraft-button-control:not(:disabled):hover::before { opacity: .11; }
+.stagecraft-button-control:not(:disabled):active::before { background: #000; opacity: .16; }
+.stagecraft-button-control:disabled { cursor: default; }
+.stagecraft-button-control:focus { outline: none; }
+.stagecraft-button-focus-ring { display: none; }
+.stagecraft-button-control:focus-visible ~ .stagecraft-button-focus-ring { display: block; }
+
+.stagecraft-button-focus-outer,
+.stagecraft-button-focus-inner {
+  display: none;
+}
+
+.stagecraft-button-control:focus-visible ~ .stagecraft-button-focus-ring .stagecraft-button-focus-outer,
+.stagecraft-button-control:focus-visible ~ .stagecraft-button-focus-ring .stagecraft-button-focus-inner {
+  display: block;
+}

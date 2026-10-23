@@ -1,0 +1,19 @@
+.stagecraft-editor .stagecraft-viewer-panel { grid-template-rows:40px auto minmax(0,1fr) auto auto; }
+.stagecraft-preview-viewport-controls { display:grid; grid-template-columns:minmax(140px,1fr) auto auto minmax(0,2fr); align-items:center; gap:6px 10px; padding:6px 12px 0; color:var(--stagecraft-muted); font-size:11px; }
+.stagecraft-viewport-preset-label { display:grid; grid-template-columns:auto minmax(120px,1fr); align-items:center; gap:8px; min-width:0; margin:0; }
+.stagecraft-viewport-preset-label select { min-width:0; }
+.stagecraft-viewport-custom { display:flex; align-items:center; gap:6px; }
+.stagecraft-viewport-custom[hidden] { display:none; }
+.stagecraft-viewport-custom label { display:grid; grid-template-columns:auto 82px; align-items:center; gap:4px; margin:0; }
+.stagecraft-viewport-custom input[type=number] { width:82px; height:28px; }
+.stagecraft-preview-viewport-controls output { color:var(--stagecraft-text); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.stagecraft-preview-viewport-controls small { grid-column:1/-1; color:var(--stagecraft-muted); }
+.stagecraft-viewport-status { grid-column:1/-1; min-height:0; color:#f3bb89; }
+.stagecraft-viewport-status:empty { display:none; }
+.stagecraft-viewport-status.stagecraft-viewport-error { display:block; }
+.stagecraft-editor .stagecraft-viewer { flex:0 0 auto; max-width:100%; max-height:100%; }
+@container (max-width:650px) {
+  .stagecraft-preview-viewport-controls { grid-template-columns:minmax(0,1fr) auto; }
+  .stagecraft-viewport-preset-label { grid-column:1/-1; }
+  .stagecraft-viewport-custom { grid-column:1/-1; }
+}

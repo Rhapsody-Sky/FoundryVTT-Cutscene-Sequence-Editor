@@ -1,0 +1,22 @@
+{
+  "name": "stagecraft",
+  "version": "0.19.7",
+  "private": true,
+  "type": "module",
+  "description": "Stagecraft: create animations, visual effects and interactive sequences for Foundry Virtual Tabletop.",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test.mjs",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "esbuild": "0.28.2",
+    "typescript": "5.9.3"
+  },
+  "author": "Rhapsody"
+}

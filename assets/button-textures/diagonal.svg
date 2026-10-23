@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <defs>
+    <pattern id="diagonal" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+      <path d="M0 0V18" stroke="#fff" stroke-opacity=".14" stroke-width="2"/>
+      <path d="M5 0V18" stroke="#000" stroke-opacity=".09" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="160" height="160" fill="url(#diagonal)"/>
+</svg>

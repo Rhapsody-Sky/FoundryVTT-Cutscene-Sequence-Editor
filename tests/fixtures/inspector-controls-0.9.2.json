@@ -1,0 +1,2627 @@
+{
+  "source": "Installed stagecraft 0.9.2 editor.hbs",
+  "fields": [
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-clip-duration",
+        "type": "number",
+        "min": "0.001",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-entrance",
+        "type": "number",
+        "min": "0",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-exit",
+        "type": "number",
+        "min": "0",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-in",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-loop",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-loop-indefinitely",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-muted",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "audio-on-break"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "pause"
+          },
+          "text": "__STAGECRAFT.Editor.BreakPause__"
+        },
+        {
+          "attrs": {
+            "value": "loop"
+          },
+          "text": "__STAGECRAFT.Editor.BreakLoop__"
+        },
+        {
+          "attrs": {
+            "value": "finish"
+          },
+          "text": "__STAGECRAFT.Editor.BreakFinish__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-out",
+        "type": "number",
+        "min": "0.001",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-path",
+        "type": "text",
+        "required": "",
+        "maxlength": "2048",
+        "autocomplete": "off"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-start",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "audio-volume",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "bars-blend-mode"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "normal"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Normal__"
+        },
+        {
+          "attrs": {
+            "value": "multiply"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Multiply__"
+        },
+        {
+          "attrs": {
+            "value": "screen"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Screen__"
+        },
+        {
+          "attrs": {
+            "value": "plus-lighter"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.PlusLighter__"
+        },
+        {
+          "attrs": {
+            "value": "overlay"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Overlay__"
+        },
+        {
+          "attrs": {
+            "value": "difference"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Difference__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "bars-duration",
+        "type": "number",
+        "min": "0.001",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "bars-duration-mode"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "fixed"
+          },
+          "text": "__STAGECRAFT.Editor.Fixed__"
+        },
+        {
+          "attrs": {
+            "value": "sequence-end"
+          },
+          "text": "__STAGECRAFT.Editor.HoldToEnd__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "bars-entrance",
+        "type": "number",
+        "min": "0.001",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "bars-entrance-preset"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "none"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationNone__"
+        },
+        {
+          "attrs": {
+            "value": "fade"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFade__"
+        },
+        {
+          "attrs": {
+            "value": "slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationSlide__"
+        },
+        {
+          "attrs": {
+            "value": "fade-slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeSlide__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "bars-exit",
+        "type": "number",
+        "min": "0.001",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "bars-exit-preset"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "none"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationNone__"
+        },
+        {
+          "attrs": {
+            "value": "fade"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFade__"
+        },
+        {
+          "attrs": {
+            "value": "slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationSlide__"
+        },
+        {
+          "attrs": {
+            "value": "fade-slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeSlide__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "bars-height",
+        "type": "number",
+        "min": "0",
+        "max": "50",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "bars-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "bars-start",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "block-input",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "break-position",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "0.001",
+        "required": "",
+        "disabled": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "clip-track"
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "end-media"
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "ending"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "automatic"
+          },
+          "text": "__STAGECRAFT.Editor.Automatic__"
+        },
+        {
+          "attrs": {
+            "value": "fixed"
+          },
+          "text": "__STAGECRAFT.Editor.Fixed__"
+        },
+        {
+          "attrs": {
+            "value": "manual"
+          },
+          "text": "__STAGECRAFT.Editor.Manual__"
+        },
+        {
+          "attrs": {
+            "value": "media"
+          },
+          "text": "__STAGECRAFT.Editor.EndWithMedia__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "exit",
+        "type": "number",
+        "min": "0",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "glow-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "glow-enabled",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "glow-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "glow-radius",
+        "type": "number",
+        "min": "0",
+        "max": "128",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-blend-mode"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "normal"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Normal__"
+        },
+        {
+          "attrs": {
+            "value": "multiply"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Multiply__"
+        },
+        {
+          "attrs": {
+            "value": "screen"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Screen__"
+        },
+        {
+          "attrs": {
+            "value": "plus-lighter"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.PlusLighter__"
+        },
+        {
+          "attrs": {
+            "value": "overlay"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Overlay__"
+        },
+        {
+          "attrs": {
+            "value": "difference"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Difference__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-crop-height",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-crop-width",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-crop-x",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-crop-y",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-duration",
+        "type": "number",
+        "min": "0.001",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-duration-mode"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "fixed"
+          },
+          "text": "__STAGECRAFT.Editor.Fixed__"
+        },
+        {
+          "attrs": {
+            "value": "sequence-end"
+          },
+          "text": "__STAGECRAFT.Editor.FixedUntilEnd__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-entrance",
+        "type": "number",
+        "min": "0.001",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-entrance-direction"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "left"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionLeft__"
+        },
+        {
+          "attrs": {
+            "value": "right"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionRight__"
+        },
+        {
+          "attrs": {
+            "value": "up"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionUp__"
+        },
+        {
+          "attrs": {
+            "value": "down"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionDown__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-entrance-distance",
+        "type": "number",
+        "min": "0",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-entrance-easing"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "linear"
+          },
+          "text": "__STAGECRAFT.Editor.EasingLinear__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingIn__"
+        },
+        {
+          "attrs": {
+            "value": "ease-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingOut__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingInOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackIn__"
+        },
+        {
+          "attrs": {
+            "value": "back-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackInOut__"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-entrance-preset"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "none"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationNone__"
+        },
+        {
+          "attrs": {
+            "value": "fade"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFade__"
+        },
+        {
+          "attrs": {
+            "value": "slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationSlide__"
+        },
+        {
+          "attrs": {
+            "value": "fade-slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeSlide__"
+        },
+        {
+          "attrs": {
+            "value": "zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationZoomPreset__"
+        },
+        {
+          "attrs": {
+            "value": "fade-zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeZoom__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-entrance-scale",
+        "type": "number",
+        "min": "5",
+        "max": "400",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-exit",
+        "type": "number",
+        "min": "0.001",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-exit-direction"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "left"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionLeft__"
+        },
+        {
+          "attrs": {
+            "value": "right"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionRight__"
+        },
+        {
+          "attrs": {
+            "value": "up"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionUp__"
+        },
+        {
+          "attrs": {
+            "value": "down"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionDown__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-exit-distance",
+        "type": "number",
+        "min": "0",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-exit-easing"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "linear"
+          },
+          "text": "__STAGECRAFT.Editor.EasingLinear__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingIn__"
+        },
+        {
+          "attrs": {
+            "value": "ease-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingOut__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingInOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackIn__"
+        },
+        {
+          "attrs": {
+            "value": "back-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackInOut__"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-exit-preset"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "none"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationNone__"
+        },
+        {
+          "attrs": {
+            "value": "fade"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFade__"
+        },
+        {
+          "attrs": {
+            "value": "slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationSlide__"
+        },
+        {
+          "attrs": {
+            "value": "fade-slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeSlide__"
+        },
+        {
+          "attrs": {
+            "value": "zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationZoomPreset__"
+        },
+        {
+          "attrs": {
+            "value": "fade-zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeZoom__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-exit-scale",
+        "type": "number",
+        "min": "5",
+        "max": "400",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "image-fit"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "contain"
+          },
+          "text": "__STAGECRAFT.Editor.Contain__"
+        },
+        {
+          "attrs": {
+            "value": "cover"
+          },
+          "text": "__STAGECRAFT.Editor.Cover__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-glow-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-glow-enabled",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-glow-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-glow-radius",
+        "type": "number",
+        "min": "0",
+        "max": "128",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-height",
+        "type": "number",
+        "min": "1",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-0-x",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-0-y",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-1-x",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-1-y",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-2-x",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-2-y",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-3-x",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-mask-3-y",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-outline-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-outline-enabled",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-outline-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-outline-width",
+        "type": "number",
+        "min": "0",
+        "max": "32",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-path",
+        "type": "text",
+        "required": "",
+        "maxlength": "2048",
+        "autocomplete": "off"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-shadow-blur",
+        "type": "number",
+        "min": "0",
+        "max": "128",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-shadow-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-shadow-enabled",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-shadow-offset-x",
+        "type": "number",
+        "min": "-256",
+        "max": "256",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-shadow-offset-y",
+        "type": "number",
+        "min": "-256",
+        "max": "256",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-shadow-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-start",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-width",
+        "type": "number",
+        "min": "1",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-x",
+        "type": "number",
+        "min": "-32768",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "image-y",
+        "type": "number",
+        "min": "-32768",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "outline-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "outline-enabled",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "outline-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "outline-width",
+        "type": "number",
+        "min": "0",
+        "max": "32",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "sequence-duration",
+        "type": "number",
+        "min": "0.001",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "sequence-name",
+        "type": "text",
+        "required": "",
+        "maxlength": "200",
+        "disabled": "",
+        "hidden": "",
+        "autocomplete": "off"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "shadow-blur",
+        "type": "number",
+        "min": "0",
+        "max": "128",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "shadow-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "shadow-enabled",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "shadow-offset-x",
+        "type": "number",
+        "min": "-256",
+        "max": "256",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "shadow-offset-y",
+        "type": "number",
+        "min": "-256",
+        "max": "256",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "shadow-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "surface"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "window"
+          },
+          "text": "__STAGECRAFT.Editor.Window__"
+        },
+        {
+          "attrs": {
+            "value": "canvas"
+          },
+          "text": "__STAGECRAFT.Editor.Canvas__"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-blend-mode"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "normal"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Normal__"
+        },
+        {
+          "attrs": {
+            "value": "multiply"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Multiply__"
+        },
+        {
+          "attrs": {
+            "value": "screen"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Screen__"
+        },
+        {
+          "attrs": {
+            "value": "plus-lighter"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.PlusLighter__"
+        },
+        {
+          "attrs": {
+            "value": "overlay"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Overlay__"
+        },
+        {
+          "attrs": {
+            "value": "difference"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Difference__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-duration",
+        "type": "number",
+        "min": "0.001",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-duration-mode"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "fixed"
+          },
+          "text": "__STAGECRAFT.Editor.Fixed__"
+        },
+        {
+          "attrs": {
+            "value": "sequence-end"
+          },
+          "text": "__STAGECRAFT.Editor.HoldToEnd__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-entrance",
+        "type": "number",
+        "min": "0.001",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-entrance-direction"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "left"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionLeft__"
+        },
+        {
+          "attrs": {
+            "value": "right"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionRight__"
+        },
+        {
+          "attrs": {
+            "value": "up"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionUp__"
+        },
+        {
+          "attrs": {
+            "value": "down"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionDown__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-entrance-distance",
+        "type": "number",
+        "min": "0",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-entrance-easing"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "linear"
+          },
+          "text": "__STAGECRAFT.Editor.EasingLinear__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingIn__"
+        },
+        {
+          "attrs": {
+            "value": "ease-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingOut__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingInOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackIn__"
+        },
+        {
+          "attrs": {
+            "value": "back-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackInOut__"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-entrance-preset"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "none"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationNone__"
+        },
+        {
+          "attrs": {
+            "value": "fade"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFade__"
+        },
+        {
+          "attrs": {
+            "value": "slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationSlide__"
+        },
+        {
+          "attrs": {
+            "value": "fade-slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeSlide__"
+        },
+        {
+          "attrs": {
+            "value": "zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationZoomPreset__"
+        },
+        {
+          "attrs": {
+            "value": "fade-zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeZoom__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-entrance-scale",
+        "type": "number",
+        "min": "5",
+        "max": "400",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-exit",
+        "type": "number",
+        "min": "0.001",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-exit-direction"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "left"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionLeft__"
+        },
+        {
+          "attrs": {
+            "value": "right"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionRight__"
+        },
+        {
+          "attrs": {
+            "value": "up"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionUp__"
+        },
+        {
+          "attrs": {
+            "value": "down"
+          },
+          "text": "__STAGECRAFT.Editor.DirectionDown__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-exit-distance",
+        "type": "number",
+        "min": "0",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-exit-easing"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "linear"
+          },
+          "text": "__STAGECRAFT.Editor.EasingLinear__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingIn__"
+        },
+        {
+          "attrs": {
+            "value": "ease-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingOut__"
+        },
+        {
+          "attrs": {
+            "value": "ease-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingInOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackIn__"
+        },
+        {
+          "attrs": {
+            "value": "back-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackOut__"
+        },
+        {
+          "attrs": {
+            "value": "back-in-out"
+          },
+          "text": "__STAGECRAFT.Editor.EasingBackInOut__"
+        }
+      ]
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "text-exit-preset"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "none"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationNone__"
+        },
+        {
+          "attrs": {
+            "value": "fade"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFade__"
+        },
+        {
+          "attrs": {
+            "value": "slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationSlide__"
+        },
+        {
+          "attrs": {
+            "value": "fade-slide"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeSlide__"
+        },
+        {
+          "attrs": {
+            "value": "zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationZoomPreset__"
+        },
+        {
+          "attrs": {
+            "value": "fade-zoom"
+          },
+          "text": "__STAGECRAFT.Editor.AnimationFadeZoom__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-exit-scale",
+        "type": "number",
+        "min": "5",
+        "max": "400",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "text-start",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "title-align"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "left"
+          },
+          "text": "__STAGECRAFT.Editor.AlignLeft__"
+        },
+        {
+          "attrs": {
+            "value": "center"
+          },
+          "text": "__STAGECRAFT.Editor.AlignCenter__"
+        },
+        {
+          "attrs": {
+            "value": "right"
+          },
+          "text": "__STAGECRAFT.Editor.AlignRight__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "title-font"
+      },
+      "options": [
+        {
+          "attrs": {},
+          "text": "Signika"
+        },
+        {
+          "attrs": {},
+          "text": "Modesto Condensed"
+        },
+        {
+          "attrs": {},
+          "text": "Arial"
+        },
+        {
+          "attrs": {},
+          "text": "Arial Black"
+        },
+        {
+          "attrs": {},
+          "text": "Georgia"
+        },
+        {
+          "attrs": {},
+          "text": "Tahoma"
+        },
+        {
+          "attrs": {},
+          "text": "Times New Roman"
+        },
+        {
+          "attrs": {},
+          "text": "Trebuchet MS"
+        },
+        {
+          "attrs": {},
+          "text": "Verdana"
+        },
+        {
+          "attrs": {},
+          "text": "serif"
+        },
+        {
+          "attrs": {},
+          "text": "sans-serif"
+        },
+        {
+          "attrs": {},
+          "text": "monospace"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-height",
+        "type": "number",
+        "min": "1",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-minimum-size",
+        "type": "number",
+        "min": "1",
+        "max": "512",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-shrink",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-size",
+        "type": "number",
+        "min": "1",
+        "max": "512",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "textarea",
+      "attrs": {
+        "name": "title-text",
+        "required": "",
+        "maxlength": "10000",
+        "rows": "3"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-width",
+        "type": "number",
+        "min": "1",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-x",
+        "type": "number",
+        "min": "-32768",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "title-y",
+        "type": "number",
+        "min": "-32768",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "video-blend-mode"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "normal"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Normal__"
+        },
+        {
+          "attrs": {
+            "value": "multiply"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Multiply__"
+        },
+        {
+          "attrs": {
+            "value": "screen"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Screen__"
+        },
+        {
+          "attrs": {
+            "value": "plus-lighter"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.PlusLighter__"
+        },
+        {
+          "attrs": {
+            "value": "overlay"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Overlay__"
+        },
+        {
+          "attrs": {
+            "value": "difference"
+          },
+          "text": "__STAGECRAFT.Editor.Blend.Difference__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-entrance",
+        "type": "number",
+        "min": "0",
+        "max": "600",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "video-fit"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "contain"
+          },
+          "text": "__STAGECRAFT.Editor.Contain__"
+        },
+        {
+          "attrs": {
+            "value": "cover"
+          },
+          "text": "__STAGECRAFT.Editor.Cover__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-height",
+        "type": "number",
+        "min": "1",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-in",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-keying-color",
+        "type": "color",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-keying-enabled",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-keying-softness",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "0.1",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-keying-tolerance",
+        "type": "number",
+        "min": "0",
+        "max": "100",
+        "step": "0.1",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-loop",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-muted",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "select",
+      "attrs": {
+        "name": "video-on-break"
+      },
+      "options": [
+        {
+          "attrs": {
+            "value": "pause"
+          },
+          "text": "__STAGECRAFT.Editor.BreakPause__"
+        },
+        {
+          "attrs": {
+            "value": "loop"
+          },
+          "text": "__STAGECRAFT.Editor.BreakLoop__"
+        },
+        {
+          "attrs": {
+            "value": "finish"
+          },
+          "text": "__STAGECRAFT.Editor.BreakFinish__"
+        }
+      ]
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-opacity",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-out",
+        "type": "number",
+        "min": "0.001",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-path",
+        "type": "text",
+        "required": "",
+        "maxlength": "2048",
+        "autocomplete": "off"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-positioned",
+        "type": "checkbox"
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-start",
+        "type": "number",
+        "min": "0",
+        "max": "604800",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-volume",
+        "type": "number",
+        "min": "0",
+        "max": "1",
+        "step": "0.01",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-width",
+        "type": "number",
+        "min": "1",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-x",
+        "type": "number",
+        "min": "-32768",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "video-y",
+        "type": "number",
+        "min": "-32768",
+        "max": "32768",
+        "step": "any",
+        "required": ""
+      },
+      "options": []
+    }
+  ],
+  "dataAttributes": {
+    "data-stagecraft-sequence-picker": [
+      ""
+    ],
+    "data-stagecraft-action": [
+      "choose-audio",
+      "choose-image",
+      "choose-video",
+      "continue-preview",
+      "delete-sequence",
+      "duplicate",
+      "duplicate-clip",
+      "fade-preview",
+      "inspect-audio",
+      "inspect-video",
+      "new",
+      "pause-preview",
+      "play",
+      "prepare-group",
+      "preview",
+      "redo",
+      "refresh",
+      "reload",
+      "remove-break",
+      "remove-clip",
+      "rename",
+      "reset-image-mask",
+      "save",
+      "session",
+      "stop-preview",
+      "undo"
+    ],
+    "data-stagecraft-save-state": [
+      ""
+    ],
+    "data-stagecraft-library": [
+      ""
+    ],
+    "data-stagecraft-templates": [
+      ""
+    ],
+    "data-stagecraft-splitter": [
+      "inspector",
+      "library",
+      "timeline"
+    ],
+    "data-stagecraft-clock": [
+      ""
+    ],
+    "data-stagecraft-preview-state": [
+      ""
+    ],
+    "data-stagecraft-viewport-controls": [
+      ""
+    ],
+    "data-invalid-message": [
+      "__STAGECRAFT.Editor.ViewportInvalid__"
+    ],
+    "data-stagecraft-viewport-preset": [
+      ""
+    ],
+    "data-stagecraft-viewport-custom": [
+      ""
+    ],
+    "data-stagecraft-viewport-width": [
+      ""
+    ],
+    "data-stagecraft-viewport-height": [
+      ""
+    ],
+    "data-stagecraft-viewport-size": [
+      ""
+    ],
+    "data-stagecraft-viewport-status": [
+      ""
+    ],
+    "data-stagecraft-viewer": [
+      ""
+    ],
+    "data-stagecraft-local-state": [
+      ""
+    ],
+    "data-stagecraft-inspector-tab": [
+      "clip",
+      "sequence"
+    ],
+    "data-stagecraft-inspector": [
+      ""
+    ],
+    "data-stagecraft-inspector-page": [
+      "clip",
+      "sequence"
+    ],
+    "data-stagecraft-break-panel": [
+      ""
+    ],
+    "data-stagecraft-selected-type": [
+      ""
+    ],
+    "data-stagecraft-template-save-group": [
+      ""
+    ],
+    "data-stagecraft-template-save": [
+      ""
+    ],
+    "data-stagecraft-element-panel": [
+      "audio",
+      "bars",
+      "image",
+      "text",
+      "video"
+    ],
+    "data-stagecraft-element-empty": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "data-stagecraft-bars-animations": [
+      ""
+    ],
+    "data-stagecraft-bars-animation": [
+      "entrance",
+      "exit",
+      "exit"
+    ],
+    "data-stagecraft-bars-animation-duration": [
+      "entrance",
+      "exit"
+    ],
+    "data-stagecraft-text-animations": [
+      ""
+    ],
+    "data-stagecraft-text-animation": [
+      "entrance",
+      "exit"
+    ],
+    "data-stagecraft-text-animation-param": [
+      "entrance",
+      "entrance",
+      "entrance",
+      "entrance",
+      "entrance",
+      "exit",
+      "exit",
+      "exit",
+      "exit",
+      "exit"
+    ],
+    "data-stagecraft-animation-kind": [
+      "slide",
+      "slide",
+      "slide",
+      "slide",
+      "slide",
+      "slide",
+      "slide",
+      "slide",
+      "zoom",
+      "zoom",
+      "zoom",
+      "zoom"
+    ],
+    "data-stagecraft-image-end": [
+      ""
+    ],
+    "data-stagecraft-image-animations": [
+      ""
+    ],
+    "data-stagecraft-image-animation": [
+      "entrance",
+      "exit"
+    ],
+    "data-stagecraft-image-animation-param": [
+      "entrance",
+      "entrance",
+      "entrance",
+      "entrance",
+      "entrance",
+      "exit",
+      "exit",
+      "exit",
+      "exit",
+      "exit"
+    ],
+    "data-stagecraft-video-box": [
+      ""
+    ],
+    "data-stagecraft-video-duration": [
+      ""
+    ],
+    "data-stagecraft-break-behavior": [
+      "audio",
+      "video"
+    ],
+    "data-stagecraft-audio-duration": [
+      ""
+    ],
+    "data-stagecraft-audio-duration-mode": [
+      "fixed"
+    ],
+    "data-stagecraft-ending-mode": [
+      "media"
+    ],
+    "data-stagecraft-ending-duration": [
+      ""
+    ],
+    "data-stagecraft-duration-label": [
+      ""
+    ],
+    "data-stagecraft-timing-errors": [
+      ""
+    ],
+    "data-stagecraft-presentation": [
+      ""
+    ],
+    "data-stagecraft-timeline": [
+      ""
+    ],
+    "data-stagecraft-message": [
+      ""
+    ],
+    "data-stagecraft-preview-state-error": [
+      ""
+    ]
+  },
+  "visibility": [
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "sequence-name",
+        "hidden": "",
+        "disabled": ""
+      }
+    },
+    {
+      "tag": "div",
+      "attrs": {
+        "data-stagecraft-viewport-custom": "",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "button",
+      "attrs": {
+        "data-stagecraft-action": "continue-preview",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "data-stagecraft-break-panel": "",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "input",
+      "attrs": {
+        "name": "break-position",
+        "disabled": ""
+      }
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "data-stagecraft-element-panel": "text",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "data-stagecraft-element-panel": "image",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "data-stagecraft-element-panel": "video",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "data-stagecraft-element-panel": "audio",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "data-stagecraft-inspector-page": "sequence",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "label",
+      "attrs": {
+        "data-stagecraft-ending-mode": "media",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "label",
+      "attrs": {
+        "data-stagecraft-ending-duration": "",
+        "hidden": ""
+      }
+    },
+    {
+      "tag": "div",
+      "attrs": {
+        "data-stagecraft-timing-errors": "",
+        "hidden": ""
+      }
+    }
+  ]
+}

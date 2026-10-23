@@ -1,0 +1,58 @@
+.stagecraft-audience-dialog { width: 380px; max-width: calc(100vw - 24px); }
+.stagecraft-audience-dialog .stagecraft-audience-sequence-name { max-width: 100%; overflow-wrap: anywhere; }
+.stagecraft-audience-picker {
+  --checkbox-size: 16px;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--color-border-light-2, var(--stagecraft-line, currentColor));
+  border-radius: 5px;
+  color: var(--color-text-primary, inherit);
+}
+.stagecraft-audience-picker legend {
+  padding: 0 4px;
+  color: var(--color-text-primary, inherit);
+  font-size: 13px;
+  font-weight: 600;
+}
+.stagecraft-audience-picker__modes { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.stagecraft-audience-picker__mode,
+.stagecraft-audience-picker__gm,
+.stagecraft-audience-picker__user {
+  display: flex !important;
+  align-items: center;
+  min-width: 0;
+  margin: 0 !important;
+  text-align: left;
+}
+.stagecraft-audience-picker__mode,
+.stagecraft-audience-picker__gm { gap: 8px; min-height: 26px; }
+.stagecraft-audience-picker__user { gap: 8px; min-height: 30px; padding: 4px 6px; border-radius: 3px; }
+.stagecraft-audience-picker__user:nth-child(even) { background: rgb(255 255 255 / 3%); }
+.stagecraft-audience-picker input[type="checkbox"],
+.stagecraft-audience-picker input[type="radio"] {
+  --checkbox-size: 16px;
+  flex: 0 0 16px !important;
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  margin: 0 !important;
+}
+.stagecraft-audience-picker__gm > span,
+.stagecraft-audience-picker__mode > span,
+.stagecraft-audience-picker__name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.stagecraft-audience-picker__gm > span,
+.stagecraft-audience-picker__name { flex: 1 1 auto; }
+.stagecraft-audience-picker__users { display: grid; gap: 2px; max-height: 220px; overflow: auto; }
+.stagecraft-audience-picker__users[hidden] { display: none !important; }
+.stagecraft-audience-picker__offline { flex: 0 0 auto; color: var(--color-text-secondary, currentColor); font-size: 11px; text-align: right; }
+.stagecraft-audience-picker__empty,
+.stagecraft-audience-picker__status { margin: 0; color: var(--color-text-secondary, currentColor); font-size: 12px; }
+.stagecraft-audience-picker__empty[hidden],
+.stagecraft-audience-picker__status[hidden] { display: none !important; }

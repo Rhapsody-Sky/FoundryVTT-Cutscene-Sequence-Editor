@@ -1,0 +1,23 @@
+/* Authoring guides stay above the preview and never enter playback surfaces. */
+.stagecraft-image-handles { position:absolute; inset:0; z-index:5; pointer-events:none; }
+.stagecraft-image-handles[hidden] { display:none; }
+.stagecraft-image-tools { position:absolute; top:8px; right:8px; z-index:3; display:flex; gap:4px; pointer-events:auto; }
+.stagecraft-editor .stagecraft-image-tools button { width:30px; min-height:28px; padding:4px; background:#20252de8; }
+.stagecraft-editor .stagecraft-image-tools button[aria-pressed="true"] { background:var(--stagecraft-accent); color:#102329; border-color:var(--stagecraft-accent); }
+.stagecraft-image-guide { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.stagecraft-image-guide polygon { fill:none; stroke:#86c9d3; stroke-width:1.5; }
+.stagecraft-editor .stagecraft-image-handle { position:absolute; width:14px; height:14px; min-height:0; margin:0; padding:0; border:2px solid #102329; border-radius:50%; background:#a8e8ed; transform:translate(-50%,-50%); z-index:2; pointer-events:auto; touch-action:none; cursor:crosshair; }
+.stagecraft-editor .stagecraft-image-handle[aria-pressed="true"] { background:#ffca65; border-color:#452b08; box-shadow:0 0 0 2px #ffca6580; }
+.stagecraft-editor [data-image-edit-mode="transform"] .stagecraft-image-handle { border-radius:2px; cursor:nwse-resize; }
+.stagecraft-editor [data-image-edit-mode="transform"] .stagecraft-image-handle[data-image-corner="1"],
+.stagecraft-editor [data-image-edit-mode="transform"] .stagecraft-image-handle[data-image-corner="3"] { cursor:nesw-resize; }
+.stagecraft-editor .stagecraft-image-edge-handle { position:absolute; width:16px; height:10px; min-height:0; margin:0; padding:0; border:2px solid #102329; border-radius:5px; background:#a8e8ed; transform:translate(-50%,-50%); z-index:2; pointer-events:auto; touch-action:none; }
+.stagecraft-editor .stagecraft-image-edge-handle[hidden] { display:none!important; }
+.stagecraft-editor [data-image-edit-mode="transform"] .stagecraft-image-edge-handle[data-image-edge="top"],
+.stagecraft-editor [data-image-edit-mode="transform"] .stagecraft-image-edge-handle[data-image-edge="bottom"] { cursor:ns-resize; }
+.stagecraft-editor [data-image-edit-mode="transform"] .stagecraft-image-edge-handle[data-image-edge="left"],
+.stagecraft-editor [data-image-edit-mode="transform"] .stagecraft-image-edge-handle[data-image-edge="right"] { width:10px; height:16px; cursor:ew-resize; }
+.stagecraft-editor .stagecraft-image-move { position:absolute; margin:0; min-height:0; padding:0; border:0; border-radius:0; background:transparent; pointer-events:auto; touch-action:none; cursor:move; }
+.stagecraft-editor .stagecraft-image-move:hover { background:#86c9d308; border:0; }
+/* Foundry's button transitions must not ease pointer-driven geometry. */
+.stagecraft-editor .stagecraft-image-handle, .stagecraft-editor .stagecraft-image-edge-handle, .stagecraft-editor .stagecraft-image-move { transition:none!important; }

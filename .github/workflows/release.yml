@@ -1,0 +1,79 @@
+name: Release Stagecraft
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: read
+
+# Serialize different tags as well: an older run must never replace a newer latest.
+concurrency:
+  group: stagecraft-stable-release
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install locked build dependencies
+        run: npm ci
+      - name: Typecheck, test and build
+        run: npm run check
+      - name: Test release packaging and publication guards
+        run: python3 -m unittest discover -s tests/release -p 'test_*.py' -v
+      - name: Package production module and English guide
+        run: >-
+          python3 scripts/package_release.py
+          --readme README.md
+          --tag "$RELEASE_TAG"
+          --repository "$GITHUB_REPOSITORY"
+          --output release-assets
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: stagecraft-release-assets
+          path: |
+            release-assets/module.json
+            release-assets/stagecraft.zip
+          if-no-files-found: error
+          retention-days: 3
+
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+      RELEASE_COMMIT: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: stagecraft-release-assets
+          path: release-assets
+      - name: Verify uploaded draft assets and publish atomically
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          python3 .github/scripts/publish_release.py
+          --assets release-assets
+          --tag "$RELEASE_TAG"
+          --repository "$GITHUB_REPOSITORY"
+          --commit "$RELEASE_COMMIT"

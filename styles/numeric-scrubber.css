@@ -1,0 +1,7 @@
+.stagecraft-editor input[type="number"].stagecraft-numeric-scrubbable {
+  cursor:ew-resize;
+  touch-action:pan-y;
+}
+.stagecraft-editor input[type="number"].stagecraft-numeric-scrubbing {
+  user-select:none;
+}

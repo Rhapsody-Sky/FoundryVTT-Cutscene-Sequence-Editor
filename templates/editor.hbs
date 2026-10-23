@@ -1,0 +1,1002 @@
+<div class="stagecraft-editor-shell">
+  <header class="stagecraft-editor-toolbar">
+    <div class="stagecraft-sequence-controls">
+      <label class="stagecraft-name-label"><span>{{localize "STAGECRAFT.Editor.Sequence"}}</span><select data-stagecraft-sequence-picker aria-label="{{localize "STAGECRAFT.Editor.Sequence"}}"></select><input name="sequence-name" type="text" maxlength="200" required autocomplete="off" aria-label="{{localize "STAGECRAFT.Editor.Name"}}" hidden disabled></label>
+      <button type="button" data-stagecraft-action="rename" title="{{localize "STAGECRAFT.Editor.Rename"}}" aria-label="{{localize "STAGECRAFT.Editor.Rename"}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>
+      <button type="button" data-stagecraft-action="delete-sequence" title="{{localize "STAGECRAFT.Editor.DeleteSequence"}}" aria-label="{{localize "STAGECRAFT.Editor.DeleteSequence"}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+      <button type="button" data-stagecraft-action="new" title="{{localize "STAGECRAFT.Editor.New"}}" aria-label="{{localize "STAGECRAFT.Editor.New"}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+      <button type="button" data-stagecraft-action="refresh" title="{{localize "STAGECRAFT.Editor.Refresh"}}" aria-label="{{localize "STAGECRAFT.Editor.Refresh"}}"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i></button>
+      <button type="button" data-stagecraft-action="reload" title="{{localize "STAGECRAFT.Editor.Reload"}}" aria-label="{{localize "STAGECRAFT.Editor.Reload"}}"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></button>
+    </div>
+    <span class="stagecraft-save-state" data-stagecraft-save-state role="status"></span>
+    <button type="button" data-stagecraft-action="undo">{{localize "STAGECRAFT.Editor.Undo"}}</button>
+    <button type="button" data-stagecraft-action="redo">{{localize "STAGECRAFT.Editor.Redo"}}</button>
+    <button type="button" data-stagecraft-action="save" class="stagecraft-primary">{{localize "STAGECRAFT.Editor.Save"}}</button>
+    <button type="button" data-stagecraft-action="duplicate">{{localize "STAGECRAFT.Editor.Duplicate"}}</button>
+    <button type="button" data-stagecraft-action="play" class="stagecraft-play">{{localize "STAGECRAFT.Editor.PlayHere"}}</button>
+    <button type="button" data-stagecraft-action="prepare-group" class="stagecraft-primary">{{localize "STAGECRAFT.Session.Prepare"}}</button>
+    <button type="button" data-stagecraft-action="session">{{localize "STAGECRAFT.Session.Title"}}</button>
+  </header>
+  <div class="stagecraft-workspace">
+    <aside class="stagecraft-library-panel">
+      <header class="stagecraft-panel-heading"><h2>{{localize "STAGECRAFT.Editor.Library"}}</h2></header>
+      <div class="stagecraft-library-scroll"><div class="stagecraft-library" data-stagecraft-library></div><div data-stagecraft-templates><h3 class="stagecraft-templates-heading">{{localize "STAGECRAFT.Editor.TemplateLibraryTitle"}}</h3></div></div>
+    </aside>
+    <div class="stagecraft-splitter stagecraft-splitter-vertical" data-stagecraft-splitter="library" role="separator" aria-orientation="vertical" aria-label="{{localize 'STAGECRAFT.Editor.ResizeLibrary'}}" tabindex="0"></div>
+    <section class="stagecraft-viewer-panel">
+      <header class="stagecraft-panel-heading stagecraft-preview-heading"><h2>{{localize "STAGECRAFT.Editor.Preview"}}</h2><output data-stagecraft-clock>0.00 s</output><span data-stagecraft-preview-state></span></header>
+      <div class="stagecraft-preview-viewport-controls" data-stagecraft-viewport-controls data-invalid-message="{{localize 'STAGECRAFT.Editor.ViewportInvalid'}}">
+        <label class="stagecraft-viewport-preset-label"><span>{{localize "STAGECRAFT.Editor.ViewportSize"}}</span><select data-stagecraft-viewport-preset aria-label="{{localize 'STAGECRAFT.Editor.ViewportSize'}}">
+          <option value="composition" selected>{{localize "STAGECRAFT.Editor.ViewportComposition"}}</option>
+          <option value="1920x1080">1920 × 1080</option>
+          <option value="1366x768">1366 × 768</option>
+          <option value="ultrawide">{{localize "STAGECRAFT.Editor.ViewportUltrawide"}} (2560 × 1080)</option>
+          <option value="portrait">1080 × 1920</option>
+          <option value="square">1080 × 1080</option>
+          <option value="custom">{{localize "STAGECRAFT.Editor.ViewportCustom"}}</option>
+        </select></label>
+        <div class="stagecraft-viewport-custom" data-stagecraft-viewport-custom hidden>
+          <label><span>{{localize "STAGECRAFT.Editor.ViewportWidth"}}</span><input type="number" data-stagecraft-viewport-width min="64" max="16384" step="1" inputmode="numeric" aria-label="{{localize 'STAGECRAFT.Editor.ViewportWidth'}}"></label>
+          <label><span>{{localize "STAGECRAFT.Editor.ViewportHeight"}}</span><input type="number" data-stagecraft-viewport-height min="64" max="16384" step="1" inputmode="numeric" aria-label="{{localize 'STAGECRAFT.Editor.ViewportHeight'}}"></label>
+        </div>
+        <output data-stagecraft-viewport-size aria-live="polite">1920 × 1080</output>
+        <span class="stagecraft-viewport-status" data-stagecraft-viewport-status role="status" aria-live="polite"></span>
+      </div>
+      <div class="stagecraft-viewer-space"><div class="stagecraft-viewer" data-stagecraft-viewer aria-label="{{localize "STAGECRAFT.Editor.Preview"}}"><div class="stagecraft-preview-grid" aria-hidden="true"></div></div></div>
+      <div class="stagecraft-preview-transport">
+        <button type="button" class="stagecraft-primary" data-stagecraft-action="preview">{{localize "STAGECRAFT.Editor.Preview"}}</button>
+        <button type="button" data-stagecraft-action="pause-preview">{{localize "STAGECRAFT.Editor.Pause"}}</button>
+        <button type="button" class="stagecraft-primary" data-stagecraft-action="continue-preview" hidden>{{localize "STAGECRAFT.Editor.Continue"}}</button>
+        <button type="button" data-stagecraft-action="fade-preview">{{localize "STAGECRAFT.Editor.FadeOutAction"}}</button>
+        <button type="button" data-stagecraft-action="stop-preview">{{localize "STAGECRAFT.Editor.Stop"}}</button>
+      </div>
+      <div class="stagecraft-local-status"><span>{{localize "STAGECRAFT.Editor.LocalPlayback"}}</span><span data-stagecraft-local-state>{{localize "STAGECRAFT.Editor.State.idle"}}</span></div>
+    </section>
+    <div class="stagecraft-splitter stagecraft-splitter-vertical" data-stagecraft-splitter="inspector" role="separator" aria-orientation="vertical" aria-label="{{localize 'STAGECRAFT.Editor.ResizeInspector'}}" tabindex="0"></div>
+    <aside class="stagecraft-inspector-panel">
+      <header class="stagecraft-panel-heading"><h2>{{localize "STAGECRAFT.Editor.Inspector"}}</h2></header>
+      <div class="stagecraft-inspector-tabs" role="tablist" aria-label="{{localize 'STAGECRAFT.Editor.Inspector'}}">
+        <button type="button" role="tab" id="stagecraft-inspector-tab-clip" data-stagecraft-inspector-tab="clip" aria-controls="stagecraft-inspector-page-clip" aria-selected="true" tabindex="0">{{localize "STAGECRAFT.Editor.InspectorTabClip"}}</button>
+        <button type="button" role="tab" id="stagecraft-inspector-tab-sequence" data-stagecraft-inspector-tab="sequence" aria-controls="stagecraft-inspector-page-sequence" aria-selected="false" tabindex="-1">{{localize "STAGECRAFT.Editor.InspectorTabSequence"}}</button>
+      </div>
+      <div class="stagecraft-clip-section-tabs" data-stagecraft-clip-section-tabs role="tablist" aria-label="{{localize 'STAGECRAFT.Editor.ClipSections'}}">
+        <button type="button" role="tab" id="stagecraft-clip-section-tab-content" data-stagecraft-clip-section-tab="content" aria-controls="stagecraft-clip-text-content" aria-selected="true" tabindex="0">{{localize "STAGECRAFT.Editor.ClipSectionContent"}}</button>
+        <button type="button" role="tab" id="stagecraft-clip-section-tab-animation" data-stagecraft-clip-section-tab="animation" aria-controls="stagecraft-clip-text-animation" aria-selected="false" tabindex="-1">{{localize "STAGECRAFT.Editor.ClipSectionAnimation"}}</button>
+        <button type="button" role="tab" id="stagecraft-clip-section-tab-timing" data-stagecraft-clip-section-tab="timing" aria-controls="stagecraft-clip-text-timing" aria-selected="false" tabindex="-1">{{localize "STAGECRAFT.Editor.ClipSectionTiming"}}</button>
+      </div>
+      <fieldset data-stagecraft-inspector aria-label="{{localize 'STAGECRAFT.Editor.Inspector'}}">
+        <section class="stagecraft-inspector-page" data-stagecraft-inspector-page="clip" id="stagecraft-inspector-page-clip" role="tabpanel" aria-labelledby="stagecraft-inspector-tab-clip" tabindex="0">
+          <section class="stagecraft-inspector-section" data-stagecraft-break-panel hidden>
+            <div class="stagecraft-selected-clip">
+              <output>{{localize "STAGECRAFT.Editor.InnerBreak"}}</output>
+              <button type="button" data-stagecraft-action="remove-break" title="{{localize 'STAGECRAFT.Editor.RemoveBreak'}}" aria-label="{{localize 'STAGECRAFT.Editor.RemoveBreak'}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+            </div>
+            <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-break-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+              <div class="stagecraft-inspector-fields">
+                <label><span>{{localize "STAGECRAFT.Editor.BreakPosition"}}</span><input type="number" name="break-position" min="0" max="604800" step="0.001" required disabled></label>
+              </div>
+            </section>
+          </section>
+          <section class="stagecraft-inspector-section stagecraft-selected-clip-section">
+            <div class="stagecraft-selected-clip">
+              <output data-stagecraft-selected-type>{{localize "STAGECRAFT.Editor.SelectClip"}}</output>
+              <button type="button" data-stagecraft-action="duplicate-clip" title="{{localize "STAGECRAFT.Editor.DuplicateClip"}}" aria-label="{{localize "STAGECRAFT.Editor.DuplicateClip"}}"><i class="fa-solid fa-copy" aria-hidden="true"></i></button>
+              <button type="button" data-stagecraft-action="remove-clip" title="{{localize "STAGECRAFT.Editor.RemoveClip"}}" aria-label="{{localize "STAGECRAFT.Editor.RemoveClip"}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+            </div>
+            <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" data-stagecraft-clip-section-shared id="stagecraft-clip-shared-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+              <label class="stagecraft-clip-track"><span>{{localize "STAGECRAFT.Editor.Track"}}</span><select name="clip-track"></select></label>
+            </section>
+            <section class="stagecraft-element-panel" data-stagecraft-element-panel="bars">
+              <p class="stagecraft-element-empty" data-stagecraft-element-empty>{{localize "STAGECRAFT.Editor.ElementAbsent"}}</p>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="content" id="stagecraft-clip-bars-content" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-content" tabindex="0">
+                <div class="stagecraft-inspector-fields">
+                  <label><span>{{localize "STAGECRAFT.Editor.Height"}}</span><input type="number" name="bars-height" min="0" max="50" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.BlendMode"}}</span><select name="bars-blend-mode">
+                      <option value="normal">{{localize "STAGECRAFT.Editor.Blend.Normal"}}</option>
+                      <option value="multiply">{{localize "STAGECRAFT.Editor.Blend.Multiply"}}</option>
+                      <option value="screen">{{localize "STAGECRAFT.Editor.Blend.Screen"}}</option>
+                      <option value="plus-lighter">{{localize "STAGECRAFT.Editor.Blend.PlusLighter"}}</option>
+                      <option value="overlay">{{localize "STAGECRAFT.Editor.Blend.Overlay"}}</option>
+                      <option value="difference">{{localize "STAGECRAFT.Editor.Blend.Difference"}}</option>
+                  </select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Opacity"}}</span><input type="number" name="bars-opacity" min="0" max="1" step="0.01" required></label>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="animation" id="stagecraft-clip-bars-animation" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-animation" tabindex="0" hidden>
+                <div class="stagecraft-animation-fields" data-stagecraft-bars-animations>
+                  <div class="stagecraft-inspector-fields">
+                    <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="bars-entrance"><h4>{{localize "STAGECRAFT.Editor.AnimationIn"}}</h4><label class="stagecraft-text-animation-select" data-stagecraft-bars-animation="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationIn"}}</span><select name="bars-entrance-preset">
+                        <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option>
+                        <option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                        <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option>
+                        <option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                    </select></label></div>
+                    <label data-stagecraft-bars-animation-duration="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="bars-entrance" min="0.001" max="600" step="any" required></label>
+                    <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="bars-exit"><h4>{{localize "STAGECRAFT.Editor.AnimationOut"}}</h4><label class="stagecraft-text-animation-select" data-stagecraft-bars-animation="exit"><span>{{localize "STAGECRAFT.Editor.AnimationOut"}}</span><select name="bars-exit-preset">
+                        <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option>
+                        <option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                        <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option>
+                        <option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                    </select></label></div>
+                    <label data-stagecraft-bars-animation="exit" data-stagecraft-bars-animation-duration="exit"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="bars-exit" min="0.001" max="600" step="any" required></label>
+                  </div>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-bars-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields">
+                  <label><span>{{localize "STAGECRAFT.Editor.Start"}}</span><input type="number" name="bars-start" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipDuration"}}</span><select name="bars-duration-mode"><option value="fixed">{{localize "STAGECRAFT.Editor.Fixed"}}</option><option value="sequence-end">{{localize "STAGECRAFT.Editor.HoldToEnd"}}</option></select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipLength"}}</span><input type="number" name="bars-duration" min="0.001" max="604800" step="any" required></label>
+                </div>
+              </section>
+            </section>
+            <section class="stagecraft-element-panel" data-stagecraft-element-panel="text" hidden>
+              <p class="stagecraft-element-empty" data-stagecraft-element-empty>{{localize "STAGECRAFT.Editor.ElementAbsent"}}</p>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="content" id="stagecraft-clip-text-content" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-content" tabindex="0">
+                <div class="stagecraft-inspector-fields">
+                  <label class="stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.TitleText"}}</span><textarea name="title-text" maxlength="10000" required rows="3"></textarea></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Font"}}</span>
+                    <select name="title-font">
+                      <option>Signika</option><option>Modesto Condensed</option><option>Arial</option><option>Arial Black</option>
+                      <option>Georgia</option><option>Tahoma</option><option>Times New Roman</option><option>Trebuchet MS</option>
+                      <option>Verdana</option><option>serif</option><option>sans-serif</option><option>monospace</option>
+                    </select>
+                  </label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Color"}}</span><input type="color" name="title-color" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.FontSize"}}</span><input type="number" name="title-size" min="1" max="512" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Alignment"}}</span><select name="title-align"><option value="left">{{localize "STAGECRAFT.Editor.AlignLeft"}}</option><option value="center">{{localize "STAGECRAFT.Editor.AlignCenter"}}</option><option value="right">{{localize "STAGECRAFT.Editor.AlignRight"}}</option></select></label>
+                  <fieldset class="stagecraft-box-fields">
+                    <legend class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.TextBox"}}</legend>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Position"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.X'}}" type="number" name="title-x" min="-32768" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.Y'}}" type="number" name="title-y" min="-32768" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Size"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">W</span><input aria-label="{{localize 'STAGECRAFT.Editor.Width'}}" type="number" name="title-width" min="1" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">H</span><input aria-label="{{localize 'STAGECRAFT.Editor.BoxHeight'}}" type="number" name="title-height" min="1" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <label class="stagecraft-checkbox stagecraft-wide"><input type="checkbox" name="title-shrink"><span>{{localize "STAGECRAFT.Editor.ShrinkToFit"}}</span></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.MinimumFontSize"}}</span><input type="number" name="title-minimum-size" min="1" max="512" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.BlendMode"}}</span><select name="text-blend-mode">
+                      <option value="normal">{{localize "STAGECRAFT.Editor.Blend.Normal"}}</option>
+                      <option value="multiply">{{localize "STAGECRAFT.Editor.Blend.Multiply"}}</option>
+                      <option value="screen">{{localize "STAGECRAFT.Editor.Blend.Screen"}}</option>
+                      <option value="plus-lighter">{{localize "STAGECRAFT.Editor.Blend.PlusLighter"}}</option>
+                      <option value="overlay">{{localize "STAGECRAFT.Editor.Blend.Overlay"}}</option>
+                      <option value="difference">{{localize "STAGECRAFT.Editor.Blend.Difference"}}</option>
+                  </select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Opacity"}}</span><input type="number" name="text-opacity" min="0" max="1" step="0.01" required></label>
+                </div>
+                <details class="stagecraft-effect-fields">
+                  <summary><span>{{localize "STAGECRAFT.Editor.Outline"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="outline-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Outline"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary>
+                  <div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="outline-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="outline-opacity" min="0" max="1" step="0.01" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.OutlineWidth"}}</span><input type="number" name="outline-width" min="0" max="32" step="any" required></label>
+                  </div>
+                </details>
+                <details class="stagecraft-effect-fields">
+                  <summary><span>{{localize "STAGECRAFT.Editor.DropShadow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="shadow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.DropShadow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary>
+                  <div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="shadow-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="shadow-opacity" min="0" max="1" step="0.01" required></label>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.ShadowOffset"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.ShadowOffsetX'}}" type="number" name="shadow-offset-x" min="-256" max="256" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.ShadowOffsetY'}}" type="number" name="shadow-offset-y" min="-256" max="256" step="any" required></label>
+                      </div>
+                    </div>
+                    <label><span>{{localize "STAGECRAFT.Editor.ShadowBlur"}}</span><input type="number" name="shadow-blur" min="0" max="128" step="any" required></label>
+                  </div>
+                </details>
+                <details class="stagecraft-effect-fields">
+                  <summary><span>{{localize "STAGECRAFT.Editor.Glow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="glow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Glow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary>
+                  <div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="glow-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="glow-opacity" min="0" max="1" step="0.01" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.GlowRadius"}}</span><input type="number" name="glow-radius" min="0" max="128" step="any" required></label>
+                  </div>
+                </details>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="animation" id="stagecraft-clip-text-animation" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-animation" tabindex="0" hidden>
+                <div class="stagecraft-animation-fields stagecraft-title-animations" data-stagecraft-text-animations>
+                  <section class="stagecraft-title-animation" data-stagecraft-text-animation="entrance">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationIn"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-text-animation-picker="entrance"><label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="text-entrance-preset">
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option>
+                          <option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option>
+                          <option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option>
+                          <option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                          <optgroup label="{{localize 'STAGECRAFT.Editor.TextMotionGroup'}}">
+                            <option value="text-motion:line-reveal">{{localize "STAGECRAFT.Editor.TextMotion.line-reveal"}}</option>
+                            <option value="text-motion:word-ghost">{{localize "STAGECRAFT.Editor.TextMotion.word-ghost"}}</option>
+                            <option value="text-motion:kinetic-lines">{{localize "STAGECRAFT.Editor.TextMotion.kinetic-lines"}}</option>
+                            <option value="text-motion:character-fade-up">{{localize "STAGECRAFT.Editor.TextMotion.character-fade-up"}}</option>
+                            <option value="text-motion:word-fade-up">{{localize "STAGECRAFT.Editor.TextMotion.word-fade-up"}}</option>
+                            <option value="text-motion:character-slide-down">{{localize "STAGECRAFT.Editor.TextMotion.character-slide-down"}}</option>
+                            <option value="text-motion:alternating-lines">{{localize "STAGECRAFT.Editor.TextMotion.alternating-lines"}}</option>
+                            <option value="text-motion:stretch-rise">{{localize "STAGECRAFT.Editor.TextMotion.stretch-rise"}}</option>
+                            <option value="text-motion:vertical-unfold">{{localize "STAGECRAFT.Editor.TextMotion.vertical-unfold"}}</option>
+                            <option value="text-motion:converge-spread">{{localize "STAGECRAFT.Editor.TextMotion.converge-spread"}}</option>
+                            <option value="text-motion:center-out">{{localize "STAGECRAFT.Editor.TextMotion.center-out"}}</option>
+                            <option value="text-motion:scatter-assemble">{{localize "STAGECRAFT.Editor.TextMotion.scatter-assemble"}}</option>
+                            <option value="text-motion:tilt-scale">{{localize "STAGECRAFT.Editor.TextMotion.tilt-scale"}}</option>
+                            <option value="text-motion:smear-in">{{localize "STAGECRAFT.Editor.TextMotion.smear-in"}}</option>
+                            <option value="text-motion:elastic-pop">{{localize "STAGECRAFT.Editor.TextMotion.elastic-pop"}}</option>
+                            <option value="text-motion:soft-wave">{{localize "STAGECRAFT.Editor.TextMotion.soft-wave"}}</option>
+                            <option value="text-motion:random-fade">{{localize "STAGECRAFT.Editor.TextMotion.random-fade"}}</option>
+                            <option value="text-motion:tracking-expand">{{localize "STAGECRAFT.Editor.TextMotion.tracking-expand"}}</option>
+                            <option value="text-motion:emoji-pop">{{localize "STAGECRAFT.Editor.TextMotion.emoji-pop"}}</option>
+                            <option value="text-motion:character-exit-up">{{localize "STAGECRAFT.Editor.TextMotion.character-exit-up"}}</option>
+                            <option value="text-motion:fade-down-out">{{localize "STAGECRAFT.Editor.TextMotion.fade-down-out"}}</option>
+                            <option value="text-motion:blur-out">{{localize "STAGECRAFT.Editor.TextMotion.blur-out"}}</option>
+                            <option value="text-motion:scatter-out">{{localize "STAGECRAFT.Editor.TextMotion.scatter-out"}}</option>
+                            <option value="text-motion:gravity-out">{{localize "STAGECRAFT.Editor.TextMotion.gravity-out"}}</option>
+                            <option value="text-motion:scale-down-out">{{localize "STAGECRAFT.Editor.TextMotion.scale-down-out"}}</option>
+                            <option value="text-motion:reverse-erase">{{localize "STAGECRAFT.Editor.TextMotion.reverse-erase"}}</option>
+                            <option value="text-motion:collapse-center">{{localize "STAGECRAFT.Editor.TextMotion.collapse-center"}}</option>
+                            <option value="text-motion:noise-dissolve">{{localize "STAGECRAFT.Editor.TextMotion.noise-dissolve"}}</option>
+                          </optgroup>
+                      </select></label></div>
+                      <label data-stagecraft-text-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="text-entrance" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-text-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="text-entrance-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option>
+                          <option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option>
+                          <option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option>
+                          <option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option>
+                          <option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="entrance" data-stagecraft-animation-kind="motion-direction"><span>{{localize "STAGECRAFT.Editor.TextMotionFrom"}}</span><select name="text-entrance-motion-direction">
+                          <option value="default">{{localize "STAGECRAFT.Editor.TextMotionPreset"}}</option>
+                          <option value="up">{{localize "STAGECRAFT.Editor.TextMotionTop"}}</option>
+                          <option value="down">{{localize "STAGECRAFT.Editor.TextMotionBottom"}}</option>
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option>
+                          <option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="entrance" data-stagecraft-animation-kind="motion-order"><span>{{localize "STAGECRAFT.Editor.TextMotionOrder"}}</span><select name="text-entrance-motion-order">
+                          <option value="default">{{localize "STAGECRAFT.Editor.TextMotionPreset"}}</option>
+                          <option value="forward">{{localize "STAGECRAFT.Editor.TextMotionOrderForward"}}</option>
+                          <option value="reverse">{{localize "STAGECRAFT.Editor.TextMotionOrderReverse"}}</option>
+                          <option value="center-out">{{localize "STAGECRAFT.Editor.TextMotionOrderCenterOut"}}</option>
+                          <option value="edges-in">{{localize "STAGECRAFT.Editor.TextMotionOrderEdgesIn"}}</option>
+                          <option value="random">{{localize "STAGECRAFT.Editor.TextMotionOrderRandom"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="entrance" data-stagecraft-animation-kind="motion"><span>{{localize "STAGECRAFT.Editor.TextMotionAmount"}}</span><input type="number" name="text-entrance-amount" min="0" max="4" step="0.01" inputmode="decimal" required></label>
+                      <label data-stagecraft-text-animation-param="entrance" data-stagecraft-animation-kind="motion"><span>{{localize "STAGECRAFT.Editor.TextMotionStagger"}}</span><input type="number" name="text-entrance-stagger" min="0" max="90" step="1" inputmode="numeric" required></label>
+                      <label data-stagecraft-text-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationFrom"}}</span><select name="text-entrance-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option>
+                          <option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option>
+                          <option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option>
+                          <option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="text-entrance-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-text-animation-param="entrance" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationInitialScale"}}</span><input type="number" name="text-entrance-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                  <section class="stagecraft-title-animation" data-stagecraft-text-animation="exit">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationOut"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-text-animation-picker="exit"><label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="text-exit-preset">
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option>
+                          <option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option>
+                          <option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option>
+                          <option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                          <optgroup label="{{localize 'STAGECRAFT.Editor.TextMotionGroup'}}">
+                            <option value="text-motion:line-reveal">{{localize "STAGECRAFT.Editor.TextMotion.line-reveal"}}</option>
+                            <option value="text-motion:word-ghost">{{localize "STAGECRAFT.Editor.TextMotion.word-ghost"}}</option>
+                            <option value="text-motion:kinetic-lines">{{localize "STAGECRAFT.Editor.TextMotion.kinetic-lines"}}</option>
+                            <option value="text-motion:character-fade-up">{{localize "STAGECRAFT.Editor.TextMotion.character-fade-up"}}</option>
+                            <option value="text-motion:word-fade-up">{{localize "STAGECRAFT.Editor.TextMotion.word-fade-up"}}</option>
+                            <option value="text-motion:character-slide-down">{{localize "STAGECRAFT.Editor.TextMotion.character-slide-down"}}</option>
+                            <option value="text-motion:alternating-lines">{{localize "STAGECRAFT.Editor.TextMotion.alternating-lines"}}</option>
+                            <option value="text-motion:stretch-rise">{{localize "STAGECRAFT.Editor.TextMotion.stretch-rise"}}</option>
+                            <option value="text-motion:vertical-unfold">{{localize "STAGECRAFT.Editor.TextMotion.vertical-unfold"}}</option>
+                            <option value="text-motion:converge-spread">{{localize "STAGECRAFT.Editor.TextMotion.converge-spread"}}</option>
+                            <option value="text-motion:center-out">{{localize "STAGECRAFT.Editor.TextMotion.center-out"}}</option>
+                            <option value="text-motion:scatter-assemble">{{localize "STAGECRAFT.Editor.TextMotion.scatter-assemble"}}</option>
+                            <option value="text-motion:tilt-scale">{{localize "STAGECRAFT.Editor.TextMotion.tilt-scale"}}</option>
+                            <option value="text-motion:smear-in">{{localize "STAGECRAFT.Editor.TextMotion.smear-in"}}</option>
+                            <option value="text-motion:elastic-pop">{{localize "STAGECRAFT.Editor.TextMotion.elastic-pop"}}</option>
+                            <option value="text-motion:soft-wave">{{localize "STAGECRAFT.Editor.TextMotion.soft-wave"}}</option>
+                            <option value="text-motion:random-fade">{{localize "STAGECRAFT.Editor.TextMotion.random-fade"}}</option>
+                            <option value="text-motion:tracking-expand">{{localize "STAGECRAFT.Editor.TextMotion.tracking-expand"}}</option>
+                            <option value="text-motion:emoji-pop">{{localize "STAGECRAFT.Editor.TextMotion.emoji-pop"}}</option>
+                            <option value="text-motion:character-exit-up">{{localize "STAGECRAFT.Editor.TextMotion.character-exit-up"}}</option>
+                            <option value="text-motion:fade-down-out">{{localize "STAGECRAFT.Editor.TextMotion.fade-down-out"}}</option>
+                            <option value="text-motion:blur-out">{{localize "STAGECRAFT.Editor.TextMotion.blur-out"}}</option>
+                            <option value="text-motion:scatter-out">{{localize "STAGECRAFT.Editor.TextMotion.scatter-out"}}</option>
+                            <option value="text-motion:gravity-out">{{localize "STAGECRAFT.Editor.TextMotion.gravity-out"}}</option>
+                            <option value="text-motion:scale-down-out">{{localize "STAGECRAFT.Editor.TextMotion.scale-down-out"}}</option>
+                            <option value="text-motion:reverse-erase">{{localize "STAGECRAFT.Editor.TextMotion.reverse-erase"}}</option>
+                            <option value="text-motion:collapse-center">{{localize "STAGECRAFT.Editor.TextMotion.collapse-center"}}</option>
+                            <option value="text-motion:noise-dissolve">{{localize "STAGECRAFT.Editor.TextMotion.noise-dissolve"}}</option>
+                          </optgroup>
+                      </select></label></div>
+                      <label data-stagecraft-text-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="text-exit" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-text-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="text-exit-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option>
+                          <option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option>
+                          <option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option>
+                          <option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option>
+                          <option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="exit" data-stagecraft-animation-kind="motion-direction"><span>{{localize "STAGECRAFT.Editor.TextMotionTowards"}}</span><select name="text-exit-motion-direction">
+                          <option value="default">{{localize "STAGECRAFT.Editor.TextMotionPreset"}}</option>
+                          <option value="up">{{localize "STAGECRAFT.Editor.TextMotionTop"}}</option>
+                          <option value="down">{{localize "STAGECRAFT.Editor.TextMotionBottom"}}</option>
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option>
+                          <option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="exit" data-stagecraft-animation-kind="motion-order"><span>{{localize "STAGECRAFT.Editor.TextMotionOrder"}}</span><select name="text-exit-motion-order">
+                          <option value="default">{{localize "STAGECRAFT.Editor.TextMotionPreset"}}</option>
+                          <option value="forward">{{localize "STAGECRAFT.Editor.TextMotionOrderForward"}}</option>
+                          <option value="reverse">{{localize "STAGECRAFT.Editor.TextMotionOrderReverse"}}</option>
+                          <option value="center-out">{{localize "STAGECRAFT.Editor.TextMotionOrderCenterOut"}}</option>
+                          <option value="edges-in">{{localize "STAGECRAFT.Editor.TextMotionOrderEdgesIn"}}</option>
+                          <option value="random">{{localize "STAGECRAFT.Editor.TextMotionOrderRandom"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="exit" data-stagecraft-animation-kind="motion"><span>{{localize "STAGECRAFT.Editor.TextMotionAmount"}}</span><input type="number" name="text-exit-amount" min="0" max="4" step="0.01" inputmode="decimal" required></label>
+                      <label data-stagecraft-text-animation-param="exit" data-stagecraft-animation-kind="motion"><span>{{localize "STAGECRAFT.Editor.TextMotionStagger"}}</span><input type="number" name="text-exit-stagger" min="0" max="90" step="1" inputmode="numeric" required></label>
+                      <label data-stagecraft-text-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationTo"}}</span><select name="text-exit-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option>
+                          <option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option>
+                          <option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option>
+                          <option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-text-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="text-exit-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-text-animation-param="exit" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationFinalScale"}}</span><input type="number" name="text-exit-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-text-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields">
+                  <label><span>{{localize "STAGECRAFT.Editor.Start"}}</span><input type="number" name="text-start" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipDuration"}}</span><select name="text-duration-mode"><option value="fixed">{{localize "STAGECRAFT.Editor.Fixed"}}</option><option value="sequence-end">{{localize "STAGECRAFT.Editor.HoldToEnd"}}</option></select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipLength"}}</span><input type="number" name="text-duration" min="0.001" max="604800" step="any" required></label>
+                </div>
+              </section>
+            </section>
+            <section class="stagecraft-element-panel" data-stagecraft-element-panel="button" hidden>
+              <p class="stagecraft-element-empty" data-stagecraft-element-empty>{{localize "STAGECRAFT.Editor.ElementAbsent"}}</p>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="content" id="stagecraft-clip-button-content" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-content" tabindex="0">
+                <label class="stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.ButtonDesign"}}</span><select name="button-design"></select></label>
+                <fieldset class="stagecraft-inspector-group" data-stagecraft-button-action>
+                  <legend>{{localize "STAGECRAFT.Editor.ButtonAction"}}</legend>
+                  <div class="stagecraft-inspector-fields">
+                    <label><span>{{localize "STAGECRAFT.Editor.ButtonLabel"}}</span><input type="text" name="button-label" maxlength="120" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.ButtonAction"}}</span><select name="button-action"><option value="continue">{{localize "STAGECRAFT.Editor.ButtonContinue"}}</option><option value="choice">{{localize "STAGECRAFT.Editor.ButtonChoice"}}</option></select></label>
+                    <div class="stagecraft-button-choice stagecraft-wide" data-stagecraft-button-choice hidden>
+                      <label><span>{{localize "STAGECRAFT.Editor.ButtonDecisionGroup"}}</span><select name="button-decision-group"></select></label>
+                      <label data-stagecraft-button-new-group><span>{{localize "STAGECRAFT.Editor.ButtonNewDecision"}}</span><input type="text" name="button-decision-name" maxlength="200" autocomplete="off"></label>
+                      <label class="stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.ButtonMessage"}}</span><textarea name="button-message" maxlength="10000" rows="3" required></textarea></label>
+                      <label><span>{{localize "STAGECRAFT.Editor.ButtonVisibility"}}</span><select name="button-visibility"><option value="gm">{{localize "STAGECRAFT.Editor.ButtonVisibilityGM"}}</option><option value="public">{{localize "STAGECRAFT.Editor.ButtonVisibilityPublic"}}</option></select></label>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="stagecraft-inspector-group">
+                  <legend>{{localize "STAGECRAFT.Editor.ButtonAppearance"}}</legend>
+                  <div class="stagecraft-inspector-fields">
+                    <label><span>{{localize "STAGECRAFT.Editor.ButtonShape"}}</span><select name="button-shape">
+                      <option value="rectangle">{{localize "STAGECRAFT.Editor.ButtonShapeRectangle"}}</option><option value="rounded">{{localize "STAGECRAFT.Editor.ButtonShapeRounded"}}</option>
+                      <option value="pill">{{localize "STAGECRAFT.Editor.ButtonShapePill"}}</option><option value="bevel">{{localize "STAGECRAFT.Editor.ButtonShapeBevel"}}</option><option value="hexagon">{{localize "STAGECRAFT.Editor.ButtonShapeHexagon"}}</option>
+                    </select></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.BlendMode"}}</span><select name="button-blend-mode"><option value="normal">{{localize "STAGECRAFT.Editor.Blend.Normal"}}</option><option value="multiply">{{localize "STAGECRAFT.Editor.Blend.Multiply"}}</option><option value="screen">{{localize "STAGECRAFT.Editor.Blend.Screen"}}</option><option value="plus-lighter">{{localize "STAGECRAFT.Editor.Blend.PlusLighter"}}</option><option value="overlay">{{localize "STAGECRAFT.Editor.Blend.Overlay"}}</option><option value="difference">{{localize "STAGECRAFT.Editor.Blend.Difference"}}</option></select></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.Opacity"}}</span><input type="number" name="button-opacity" min="0" max="1" step="0.01" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.ButtonBackground"}}</span><input type="color" name="button-background" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.ButtonTexture"}}</span><select name="button-texture">
+                      <option value="none">{{localize "STAGECRAFT.Editor.ButtonTextureNone"}}</option><option value="grain">{{localize "STAGECRAFT.Editor.ButtonTextureGrain"}}</option>
+                      <option value="diagonal">{{localize "STAGECRAFT.Editor.ButtonTextureDiagonal"}}</option><option value="honeycomb">{{localize "STAGECRAFT.Editor.ButtonTextureHoneycomb"}}</option>
+                      <option value="facets">{{localize "STAGECRAFT.Editor.ButtonTextureFacets"}}</option><option value="foundry-file">{{localize "STAGECRAFT.Editor.ButtonTextureImage"}}</option>
+                    </select></label>
+                    <label class="stagecraft-wide" data-stagecraft-button-custom-texture><span>{{localize "STAGECRAFT.Editor.ButtonTextureFile"}}</span>
+                      <span class="stagecraft-file-field"><input type="text" name="button-texture-path" maxlength="2048" autocomplete="off"><button type="button" data-stagecraft-action="choose-button-texture" aria-label="{{localize 'STAGECRAFT.Editor.ButtonChooseTexture'}}">{{localize "STAGECRAFT.Editor.Browse"}}</button></span>
+                    </label>
+                    <label data-stagecraft-button-custom-texture><span>{{localize "STAGECRAFT.Editor.ButtonTextureFit"}}</span><select name="button-texture-fit"><option value="cover">{{localize "STAGECRAFT.Editor.FitCover"}}</option><option value="contain">{{localize "STAGECRAFT.Editor.FitContain"}}</option></select></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.Font"}}</span><select name="button-font">
+                      <option>Signika</option><option>Modesto Condensed</option><option>Arial</option><option>Arial Black</option><option>Georgia</option>
+                      <option>Tahoma</option><option>Times New Roman</option><option>Trebuchet MS</option><option>Verdana</option><option>serif</option><option>sans-serif</option><option>monospace</option>
+                    </select></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.FontSize"}}</span><input type="number" name="button-font-size" min="1" max="512" step="any" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.Color"}}</span><input type="color" name="button-color" required></label>
+                    <fieldset class="stagecraft-box-fields">
+                      <legend>{{localize "STAGECRAFT.Editor.ButtonBox"}}</legend>
+                      <div class="stagecraft-coordinate-row"><span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Position"}}</span><div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.X'}}" type="number" name="button-x" min="-32768" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.Y'}}" type="number" name="button-y" min="-32768" max="32768" step="any" required></label>
+                      </div></div>
+                      <div class="stagecraft-coordinate-row"><span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Size"}}</span><div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">W</span><input aria-label="{{localize 'STAGECRAFT.Editor.Width'}}" type="number" name="button-width" min="1" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">H</span><input aria-label="{{localize 'STAGECRAFT.Editor.BoxHeight'}}" type="number" name="button-height" min="1" max="32768" step="any" required></label>
+                      </div></div>
+                    </fieldset>
+                    <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.Outline"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="button-outline-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Outline"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                      <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="button-outline-color" required></label><label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="button-outline-opacity" min="0" max="1" step="0.01" required></label><label><span>{{localize "STAGECRAFT.Editor.OutlineWidth"}}</span><input type="number" name="button-outline-width" min="0" max="32" step="any" required></label>
+                    </div></details>
+                    <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.Shadow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="button-shadow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Shadow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                      <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="button-shadow-color" required></label><label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="button-shadow-opacity" min="0" max="1" step="0.01" required></label>
+                      <label><span>{{localize "STAGECRAFT.Editor.ShadowOffsetX"}}</span><input type="number" name="button-shadow-offset-x" min="-256" max="256" step="any" required></label><label><span>{{localize "STAGECRAFT.Editor.ShadowOffsetY"}}</span><input type="number" name="button-shadow-offset-y" min="-256" max="256" step="any" required></label><label><span>{{localize "STAGECRAFT.Editor.ShadowBlur"}}</span><input type="number" name="button-shadow-blur" min="0" max="128" step="any" required></label>
+                    </div></details>
+                    <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.Glow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="button-glow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Glow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                      <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="button-glow-color" required></label><label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="button-glow-opacity" min="0" max="1" step="0.01" required></label><label><span>{{localize "STAGECRAFT.Editor.GlowRadius"}}</span><input type="number" name="button-glow-radius" min="0" max="128" step="any" required></label>
+                    </div></details>
+                  </div>
+                </fieldset>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="animation" id="stagecraft-clip-button-animation" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-animation" tabindex="0" hidden>
+                <div class="stagecraft-animation-fields stagecraft-title-animations" data-stagecraft-button-animations>
+                  <section class="stagecraft-title-animation" data-stagecraft-button-animation="entrance"><h4>{{localize "STAGECRAFT.Editor.AnimationIn"}}</h4><div class="stagecraft-inspector-fields">
+                    <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="button-entrance"><label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="button-entrance-preset"><option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option><option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option><option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option></select></label></div>
+                    <label data-stagecraft-button-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="button-entrance" min="0.001" max="600" step="any" required></label><label data-stagecraft-button-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="button-entrance-easing"><option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option><option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option><option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option></select></label>
+                    <label data-stagecraft-button-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationFrom"}}</span><select name="button-entrance-direction"><option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option></select></label><label data-stagecraft-button-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="button-entrance-distance" min="0" max="32768" step="any" required></label><label data-stagecraft-button-animation-param="entrance" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationInitialScale"}}</span><input type="number" name="button-entrance-scale" min="5" max="400" step="any" required></label>
+                  </div></section>
+                  <section class="stagecraft-title-animation" data-stagecraft-button-animation="exit"><h4>{{localize "STAGECRAFT.Editor.AnimationOut"}}</h4><div class="stagecraft-inspector-fields">
+                    <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="button-exit"><label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="button-exit-preset"><option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option><option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option><option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option></select></label></div>
+                    <label data-stagecraft-button-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="button-exit" min="0.001" max="600" step="any" required></label><label data-stagecraft-button-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="button-exit-easing"><option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option><option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option><option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option></select></label>
+                    <label data-stagecraft-button-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationTo"}}</span><select name="button-exit-direction"><option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option></select></label><label data-stagecraft-button-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="button-exit-distance" min="0" max="32768" step="any" required></label><label data-stagecraft-button-animation-param="exit" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationFinalScale"}}</span><input type="number" name="button-exit-scale" min="5" max="400" step="any" required></label>
+                  </div></section>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-button-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields"><label><span>{{localize "STAGECRAFT.Editor.Start"}}</span><input type="number" name="button-start" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipDuration"}}</span><select name="button-duration-mode"><option value="fixed">{{localize "STAGECRAFT.Editor.Fixed"}}</option><option value="sequence-end">{{localize "STAGECRAFT.Editor.FixedUntilEnd"}}</option></select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipLength"}}</span><input type="number" name="button-duration" min="0.001" max="604800" step="any" required></label></div>
+              </section>
+            </section>
+            <section class="stagecraft-element-panel" data-stagecraft-element-panel="image" hidden>
+              <p class="stagecraft-element-empty" data-stagecraft-element-empty>{{localize "STAGECRAFT.Editor.ElementAbsent"}}</p>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="content" id="stagecraft-clip-image-content" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-content" tabindex="0">
+                <div class="stagecraft-inspector-fields">
+                  <label class="stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.ImageFile"}}</span>
+                    <span class="stagecraft-file-field"><input type="text" name="image-path" maxlength="2048" required autocomplete="off"><button type="button" data-stagecraft-action="choose-image" aria-label="{{localize "STAGECRAFT.Editor.ChooseImage"}}">{{localize "STAGECRAFT.Editor.Browse"}}</button></span>
+                  </label>
+                  <fieldset class="stagecraft-box-fields">
+                    <legend class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.ImageBox"}}</legend>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Position"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.X'}}" type="number" name="image-x" min="-32768" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.Y'}}" type="number" name="image-y" min="-32768" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Size"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">W</span><input aria-label="{{localize 'STAGECRAFT.Editor.Width'}}" type="number" name="image-width" min="1" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">H</span><input aria-label="{{localize 'STAGECRAFT.Editor.BoxHeight'}}" type="number" name="image-height" min="1" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset class="stagecraft-box-fields">
+                    <legend class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.SourceCrop"}}</legend>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.CropPosition"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="image-crop-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="image-crop-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.CropSize"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">W</span><input aria-label="{{localize 'STAGECRAFT.Editor.WidthPercent'}}" type="number" name="image-crop-width" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">H</span><input aria-label="{{localize 'STAGECRAFT.Editor.HeightPercent'}}" type="number" name="image-crop-height" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset class="stagecraft-image-mask-fields stagecraft-wide">
+                    <legend>{{localize "STAGECRAFT.Editor.ImageMask"}}</legend>
+                    <button type="button" data-stagecraft-action="reset-image-mask" aria-label="{{localize "STAGECRAFT.Editor.ImageMaskReset"}}">{{localize "STAGECRAFT.Editor.ImageMaskReset"}}</button>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.ImageCorner1"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="image-mask-0-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="image-mask-0-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.ImageCorner2"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="image-mask-1-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="image-mask-1-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.ImageCorner3"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="image-mask-2-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="image-mask-2-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.ImageCorner4"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="image-mask-3-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="image-mask-3-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <label><span>{{localize "STAGECRAFT.Editor.ImageFit"}}</span><select name="image-fit"><option value="contain">{{localize "STAGECRAFT.Editor.Contain"}}</option><option value="cover">{{localize "STAGECRAFT.Editor.Cover"}}</option></select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.BlendMode"}}</span><select name="image-blend-mode">
+                      <option value="normal">{{localize "STAGECRAFT.Editor.Blend.Normal"}}</option><option value="multiply">{{localize "STAGECRAFT.Editor.Blend.Multiply"}}</option>
+                      <option value="screen">{{localize "STAGECRAFT.Editor.Blend.Screen"}}</option><option value="plus-lighter">{{localize "STAGECRAFT.Editor.Blend.PlusLighter"}}</option>
+                      <option value="overlay">{{localize "STAGECRAFT.Editor.Blend.Overlay"}}</option><option value="difference">{{localize "STAGECRAFT.Editor.Blend.Difference"}}</option>
+                  </select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Opacity"}}</span><input type="number" name="image-opacity" min="0" max="1" step="0.01" required></label>
+                </div>
+                <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.Outline"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="image-outline-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Outline"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="image-outline-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="image-outline-opacity" min="0" max="1" step="0.01" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.OutlineWidth"}}</span><input type="number" name="image-outline-width" min="0" max="32" step="any" required></label>
+                </div></details>
+                <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.DropShadow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="image-shadow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.DropShadow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="image-shadow-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="image-shadow-opacity" min="0" max="1" step="0.01" required></label>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.ShadowOffset"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.ShadowOffsetX'}}" type="number" name="image-shadow-offset-x" min="-256" max="256" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.ShadowOffsetY'}}" type="number" name="image-shadow-offset-y" min="-256" max="256" step="any" required></label>
+                      </div>
+                    </div>
+                    <label><span>{{localize "STAGECRAFT.Editor.ShadowBlur"}}</span><input type="number" name="image-shadow-blur" min="0" max="128" step="any" required></label>
+                </div></details>
+                <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.Glow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="image-glow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Glow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="image-glow-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="image-glow-opacity" min="0" max="1" step="0.01" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.GlowRadius"}}</span><input type="number" name="image-glow-radius" min="0" max="128" step="any" required></label>
+                </div></details>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="animation" id="stagecraft-clip-image-animation" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-animation" tabindex="0" hidden>
+                <div class="stagecraft-animation-fields stagecraft-title-animations" data-stagecraft-image-animations>
+                  <section class="stagecraft-title-animation" data-stagecraft-image-animation="entrance">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationIn"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="image-entrance"><label class="stagecraft-text-animation-select" ><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="image-entrance-preset">
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                      </select></label></div>
+                      <label data-stagecraft-image-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="image-entrance" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-image-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="image-entrance-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-image-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationFrom"}}</span><select name="image-entrance-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-image-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="image-entrance-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-image-animation-param="entrance" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationInitialScale"}}</span><input type="number" name="image-entrance-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                  <section class="stagecraft-title-animation" data-stagecraft-image-animation="exit">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationOut"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="image-exit"><label class="stagecraft-text-animation-select" ><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="image-exit-preset">
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                      </select></label></div>
+                      <label data-stagecraft-image-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="image-exit" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-image-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="image-exit-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-image-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationTo"}}</span><select name="image-exit-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-image-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="image-exit-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-image-animation-param="exit" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationFinalScale"}}</span><input type="number" name="image-exit-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-image-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields">
+                  <label><span>{{localize "STAGECRAFT.Editor.Start"}}</span><input type="number" name="image-start" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipDuration"}}</span><select name="image-duration-mode"><option value="fixed">{{localize "STAGECRAFT.Editor.Fixed"}}</option><option value="sequence-end">{{localize "STAGECRAFT.Editor.FixedUntilEnd"}}</option></select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipLength"}}</span><input type="number" name="image-duration" min="0.001" max="604800" step="any" required></label>
+                  <div class="stagecraft-metadata-row stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.ImageEnd"}}</span><output data-stagecraft-image-end></output></div>
+                </div>
+              </section>
+            </section>
+            <section class="stagecraft-element-panel" data-stagecraft-element-panel="solid" hidden>
+              <p class="stagecraft-element-empty" data-stagecraft-element-empty>{{localize "STAGECRAFT.Editor.ElementAbsent"}}</p>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="content" id="stagecraft-clip-solid-content" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-content" tabindex="0">
+                <div class="stagecraft-inspector-fields">
+                  <div class="stagecraft-pattern-fields stagecraft-wide" data-stagecraft-pattern-settings hidden>
+                    <div class="stagecraft-wide stagecraft-pattern-picker" data-stagecraft-pattern-picker>
+                      <span>{{localize "STAGECRAFT.Editor.PatternPreset"}}</span>
+                      <select name="solid-pattern-preset" aria-label="{{localize 'STAGECRAFT.Editor.PatternPreset'}}" hidden tabindex="-1"></select>
+                    </div>
+                    <div class="stagecraft-pattern-palette stagecraft-wide">
+                      <label><span>{{localize "STAGECRAFT.Editor.PatternBackground"}}</span><input type="color" name="solid-pattern-color-0" required></label>
+                      <label><span>{{localize "STAGECRAFT.Editor.PatternMain"}}</span><input type="color" name="solid-pattern-color-1" required></label>
+                      <label><span>{{localize "STAGECRAFT.Editor.PatternAccent"}}</span><input type="color" name="solid-pattern-color-2" required></label>
+                    </div>
+                    <label><span>{{localize "STAGECRAFT.Editor.PatternSpeed"}}</span><input type="number" name="solid-pattern-speed" min="0" max="4" step="any" required></label>
+                    <label data-stagecraft-pattern-legacy><span>{{localize "STAGECRAFT.Editor.PatternScale"}}</span><input type="number" name="solid-pattern-scale" min="0.25" max="4" step="any" required></label>
+                    <label data-stagecraft-pattern-legacy><span>{{localize "STAGECRAFT.Editor.PatternDensity"}}</span><input type="number" name="solid-pattern-density" min="0.2" max="3" step="any" required></label>
+                    <div class="stagecraft-pattern-fields stagecraft-wide" data-stagecraft-pattern-parameters hidden></div>
+                    <label><span>{{localize "STAGECRAFT.Editor.PatternDirection"}}</span><input type="number" name="solid-pattern-direction" min="0" max="360" step="any" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.PatternIntensity"}}</span><input type="number" name="solid-pattern-intensity" min="0" max="1" step="any" required></label>
+                    <label class="stagecraft-checkbox"><input type="checkbox" name="solid-pattern-reverse"><span>{{localize "STAGECRAFT.Editor.PatternReverse"}}</span></label>
+                    <div class="stagecraft-pattern-actions stagecraft-wide">
+                      <button type="button" data-stagecraft-action="solid-pattern-variant">{{localize "STAGECRAFT.Editor.PatternVariant"}}</button>
+                      <button type="button" data-stagecraft-action="solid-pattern-palette">{{localize "STAGECRAFT.Editor.PatternPaletteReset"}}</button>
+                    </div>
+                  </div>
+                  <label data-stagecraft-static-solid-color><span>{{localize "STAGECRAFT.Editor.SolidColor"}}</span><input type="color" name="solid-color" required></label>
+                  <details class="stagecraft-effect-fields stagecraft-wide stagecraft-surface-geometry"><summary>{{localize "STAGECRAFT.Editor.SurfaceGeometry"}}</summary><div class="stagecraft-inspector-fields">
+                  <fieldset class="stagecraft-box-fields">
+                    <legend class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.SolidBox"}}</legend>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Position"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.X'}}" type="number" name="solid-x" min="-32768" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.Y'}}" type="number" name="solid-y" min="-32768" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Size"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">W</span><input aria-label="{{localize 'STAGECRAFT.Editor.Width'}}" type="number" name="solid-width" min="1" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">H</span><input aria-label="{{localize 'STAGECRAFT.Editor.BoxHeight'}}" type="number" name="solid-height" min="1" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="stagecraft-inspector-fields stagecraft-wide" data-stagecraft-solid-alpha-settings>
+                    <label><span>{{localize "STAGECRAFT.Editor.AlphaMap"}}</span>
+                      <span class="stagecraft-file-field"><input type="text" name="solid-alpha-path" maxlength="2048" autocomplete="off"><button type="button" data-stagecraft-action="choose-solid-alpha" aria-label="{{localize "STAGECRAFT.Editor.ChooseAlphaMap"}}">{{localize "STAGECRAFT.Editor.Browse"}}</button><button type="button" data-stagecraft-action="clear-solid-alpha" aria-label="{{localize "STAGECRAFT.Editor.RemoveAlphaMap"}}">{{localize "STAGECRAFT.Editor.RemoveAlphaMap"}}</button></span>
+                    </label>
+                    <small class="stagecraft-wide">{{localize "STAGECRAFT.Editor.AlphaMapHint"}}</small>
+                    <fieldset class="stagecraft-box-fields" data-stagecraft-solid-alpha-dependent>
+                      <legend class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.SourceCrop"}}</legend>
+                      <div class="stagecraft-coordinate-row">
+                        <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.CropPosition"}}</span>
+                        <div class="stagecraft-coordinate-inputs">
+                          <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="solid-crop-x" min="0" max="100" step="any" required></label>
+                          <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="solid-crop-y" min="0" max="100" step="any" required></label>
+                        </div>
+                      </div>
+                      <div class="stagecraft-coordinate-row">
+                        <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.CropSize"}}</span>
+                        <div class="stagecraft-coordinate-inputs">
+                          <label><span aria-hidden="true">W</span><input aria-label="{{localize 'STAGECRAFT.Editor.WidthPercent'}}" type="number" name="solid-crop-width" min="0" max="100" step="any" required></label>
+                          <label><span aria-hidden="true">H</span><input aria-label="{{localize 'STAGECRAFT.Editor.HeightPercent'}}" type="number" name="solid-crop-height" min="0" max="100" step="any" required></label>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <label data-stagecraft-solid-alpha-dependent><span>{{localize "STAGECRAFT.Editor.SolidFit"}}</span><select name="solid-fit"><option value="contain">{{localize "STAGECRAFT.Editor.Contain"}}</option><option value="cover">{{localize "STAGECRAFT.Editor.Cover"}}</option></select></label>
+                  </div>
+                  <fieldset class="stagecraft-image-mask-fields stagecraft-wide">
+                    <legend>{{localize "STAGECRAFT.Editor.SolidMask"}}</legend>
+                    <label><span>{{localize "STAGECRAFT.Editor.PolygonPreset"}}</span><select name="solid-polygon-preset"></select></label>
+                    <div class="stagecraft-pattern-actions">
+                      <button type="button" data-stagecraft-action="solid-add-point">{{localize "STAGECRAFT.Editor.PolygonAddPoint"}}</button>
+                      <button type="button" data-stagecraft-action="solid-remove-point">{{localize "STAGECRAFT.Editor.PolygonRemovePoint"}}</button>
+                    </div>
+                    <small>{{localize "STAGECRAFT.Editor.PolygonSelectionHint"}}</small>
+                    <button type="button" data-stagecraft-action="reset-solid-mask" aria-label="{{localize "STAGECRAFT.Editor.SolidMaskReset"}}">{{localize "STAGECRAFT.Editor.SolidMaskReset"}}</button>
+                    <details class="stagecraft-polygon-points"><summary>{{localize "STAGECRAFT.Editor.PolygonCoordinates"}}</summary><div data-stagecraft-solid-point-list>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.SolidCorner1"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="solid-mask-0-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="solid-mask-0-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.SolidCorner2"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="solid-mask-1-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="solid-mask-1-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.SolidCorner3"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="solid-mask-2-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="solid-mask-2-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.SolidCorner4"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.XPercent'}}" type="number" name="solid-mask-3-x" min="0" max="100" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.YPercent'}}" type="number" name="solid-mask-3-y" min="0" max="100" step="any" required></label>
+                      </div>
+                    </div>
+                    </div></details>
+                  </fieldset>
+
+                  </div></details>
+                  <label><span>{{localize "STAGECRAFT.Editor.BlendMode"}}</span><select name="solid-blend-mode">
+                      <option value="normal">{{localize "STAGECRAFT.Editor.Blend.Normal"}}</option><option value="multiply">{{localize "STAGECRAFT.Editor.Blend.Multiply"}}</option>
+                      <option value="screen">{{localize "STAGECRAFT.Editor.Blend.Screen"}}</option><option value="plus-lighter">{{localize "STAGECRAFT.Editor.Blend.PlusLighter"}}</option>
+                      <option value="overlay">{{localize "STAGECRAFT.Editor.Blend.Overlay"}}</option><option value="difference">{{localize "STAGECRAFT.Editor.Blend.Difference"}}</option>
+                  </select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Opacity"}}</span><input type="number" name="solid-opacity" min="0" max="1" step="0.01" required></label>
+                </div>
+                <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.Outline"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="solid-outline-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Outline"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="solid-outline-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="solid-outline-opacity" min="0" max="1" step="0.01" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.OutlineWidth"}}</span><input type="number" name="solid-outline-width" min="0" max="32" step="any" required></label>
+                </div></details>
+                <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.DropShadow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="solid-shadow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.DropShadow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="solid-shadow-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="solid-shadow-opacity" min="0" max="1" step="0.01" required></label>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.ShadowOffset"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="{{localize 'STAGECRAFT.Editor.ShadowOffsetX'}}" type="number" name="solid-shadow-offset-x" min="-256" max="256" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="{{localize 'STAGECRAFT.Editor.ShadowOffsetY'}}" type="number" name="solid-shadow-offset-y" min="-256" max="256" step="any" required></label>
+                      </div>
+                    </div>
+                    <label><span>{{localize "STAGECRAFT.Editor.ShadowBlur"}}</span><input type="number" name="solid-shadow-blur" min="0" max="128" step="any" required></label>
+                </div></details>
+                <details class="stagecraft-effect-fields"><summary><span>{{localize "STAGECRAFT.Editor.Glow"}}</span><label class="stagecraft-checkbox stagecraft-effect-enable" data-stagecraft-effect-toggle><input type="checkbox" name="solid-glow-enabled"><span class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Glow"}}: {{localize "STAGECRAFT.Editor.Enabled"}}</span></label></summary><div class="stagecraft-effect-grid">
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectColor"}}</span><input type="color" name="solid-glow-color" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.EffectOpacity"}}</span><input type="number" name="solid-glow-opacity" min="0" max="1" step="0.01" required></label>
+                    <label><span>{{localize "STAGECRAFT.Editor.GlowRadius"}}</span><input type="number" name="solid-glow-radius" min="0" max="128" step="any" required></label>
+                </div></details>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="animation" id="stagecraft-clip-solid-animation" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-animation" tabindex="0" hidden>
+                <label class="stagecraft-pattern-break" data-stagecraft-pattern-settings hidden><span>{{localize "STAGECRAFT.Editor.PatternBreakBehavior"}}</span><select name="solid-pattern-onBreak"><option value="loop">{{localize "STAGECRAFT.Editor.PatternBreakLoop"}}</option><option value="pause">{{localize "STAGECRAFT.Editor.PatternBreakPause"}}</option></select></label>
+                <div class="stagecraft-animation-fields stagecraft-title-animations" data-stagecraft-solid-animations>
+                  <section class="stagecraft-title-animation" data-stagecraft-solid-animation="entrance">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationIn"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="solid-entrance"><label class="stagecraft-text-animation-select" ><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="solid-entrance-preset">
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                      </select></label></div>
+                      <label data-stagecraft-solid-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="solid-entrance" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-solid-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="solid-entrance-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-solid-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationFrom"}}</span><select name="solid-entrance-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-solid-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="solid-entrance-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-solid-animation-param="entrance" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationInitialScale"}}</span><input type="number" name="solid-entrance-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                  <section class="stagecraft-title-animation" data-stagecraft-solid-animation="exit" data-stagecraft-solid-out-held>
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationOut"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="solid-exit"><label class="stagecraft-text-animation-select" ><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="solid-exit-preset">
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                      </select></label></div>
+                      <label data-stagecraft-solid-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="solid-exit" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-solid-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="solid-exit-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-solid-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationTo"}}</span><select name="solid-exit-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-solid-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="solid-exit-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-solid-animation-param="exit" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationFinalScale"}}</span><input type="number" name="solid-exit-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-solid-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields">
+                  <label><span>{{localize "STAGECRAFT.Editor.Start"}}</span><input type="number" name="solid-start" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipDuration"}}</span><select name="solid-duration-mode"><option value="fixed">{{localize "STAGECRAFT.Editor.Fixed"}}</option><option value="sequence-end">{{localize "STAGECRAFT.Editor.HoldToEnd"}}</option></select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.ClipLength"}}</span><input type="number" name="solid-duration" min="0.001" max="604800" step="any" required></label>
+                  <div class="stagecraft-metadata-row stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.SolidEnd"}}</span><output data-stagecraft-solid-end></output></div>
+                </div>
+              </section>
+            </section>
+            <section class="stagecraft-element-panel" data-stagecraft-element-panel="video" hidden>
+              <p class="stagecraft-element-empty" data-stagecraft-element-empty>{{localize "STAGECRAFT.Editor.ElementAbsent"}}</p>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="content" id="stagecraft-clip-video-content" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-content" tabindex="0">
+                <div class="stagecraft-inspector-fields">
+                  <label class="stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.VideoFile"}}</span>
+                    <span class="stagecraft-file-field"><input type="text" name="video-path" maxlength="2048" required autocomplete="off"><button type="button" data-stagecraft-action="choose-video" aria-label="{{localize "STAGECRAFT.Editor.ChooseVideo"}}">{{localize "STAGECRAFT.Editor.Browse"}}</button></span>
+                  </label>
+                  <div class="stagecraft-metadata-row stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.MediaDuration"}}</span><output data-stagecraft-video-duration>{{localize "STAGECRAFT.Editor.MetadataMissing"}}</output><button type="button" data-stagecraft-action="inspect-video">{{localize "STAGECRAFT.Editor.InspectVideo"}}</button></div>
+                  <label class="stagecraft-checkbox stagecraft-wide"><input type="checkbox" name="video-positioned"><span>{{localize "STAGECRAFT.Editor.VideoPositioned"}}</span></label>
+                  <fieldset class="stagecraft-box-fields" data-stagecraft-video-box>
+                    <legend class="stagecraft-visually-hidden">{{localize "STAGECRAFT.Editor.Box"}}</legend>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Position"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">X</span><input aria-label="X" type="number" name="video-x" min="-32768" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">Y</span><input aria-label="Y" type="number" name="video-y" min="-32768" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                    <div class="stagecraft-coordinate-row">
+                      <span class="stagecraft-row-label">{{localize "STAGECRAFT.Editor.Size"}}</span>
+                      <div class="stagecraft-coordinate-inputs">
+                        <label><span aria-hidden="true">W</span><input aria-label="{{localize 'STAGECRAFT.Editor.Width'}}" type="number" name="video-width" min="1" max="32768" step="any" required></label>
+                        <label><span aria-hidden="true">H</span><input aria-label="{{localize 'STAGECRAFT.Editor.Height'}}" type="number" name="video-height" min="1" max="32768" step="any" required></label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <details class="stagecraft-inspector-group">
+                    <summary>{{localize "STAGECRAFT.Editor.Keying"}}</summary>
+                    <div class="stagecraft-inspector-fields">
+                      <label class="stagecraft-checkbox stagecraft-wide"><input type="checkbox" name="video-keying-enabled"><span>{{localize "STAGECRAFT.Editor.Enabled"}}</span></label>
+                      <label><span>{{localize "STAGECRAFT.Editor.Color"}}</span><input type="color" name="video-keying-color" required></label>
+                      <label><span>{{localize "STAGECRAFT.Editor.KeyingTolerance"}}</span><input type="number" name="video-keying-tolerance" min="0" max="100" step="0.1" required></label>
+                      <label><span>{{localize "STAGECRAFT.Editor.KeyingSoftness"}}</span><input type="number" name="video-keying-softness" min="0" max="100" step="0.1" required></label>
+                    </div>
+                  </details>
+                  <label><span>{{localize "STAGECRAFT.Editor.Fit"}}</span><select name="video-fit"><option value="contain">{{localize "STAGECRAFT.Editor.Contain"}}</option><option value="cover">{{localize "STAGECRAFT.Editor.Cover"}}</option></select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.BlendMode"}}</span><select name="video-blend-mode">
+                      <option value="normal">{{localize "STAGECRAFT.Editor.Blend.Normal"}}</option>
+                      <option value="multiply">{{localize "STAGECRAFT.Editor.Blend.Multiply"}}</option>
+                      <option value="screen">{{localize "STAGECRAFT.Editor.Blend.Screen"}}</option>
+                      <option value="plus-lighter">{{localize "STAGECRAFT.Editor.Blend.PlusLighter"}}</option>
+                      <option value="overlay">{{localize "STAGECRAFT.Editor.Blend.Overlay"}}</option>
+                      <option value="difference">{{localize "STAGECRAFT.Editor.Blend.Difference"}}</option>
+                  </select></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Opacity"}}</span><input type="number" name="video-opacity" min="0" max="1" step="0.01" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.Volume"}}</span><input type="number" name="video-volume" min="0" max="1" step="0.01" required></label>
+                  <label class="stagecraft-checkbox stagecraft-wide"><input type="checkbox" name="video-muted"><span>{{localize "STAGECRAFT.Editor.Muted"}}</span></label>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="animation" id="stagecraft-clip-video-animation" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-animation" tabindex="0" hidden>
+                <div class="stagecraft-animation-fields stagecraft-title-animations" data-stagecraft-video-animations>
+                  <section class="stagecraft-title-animation" data-stagecraft-video-animation="entrance">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationIn"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="video-entrance"><label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="video-entrance-preset" data-stagecraft-video-motion-preset>
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                      </select></label></div>
+                      <label data-stagecraft-video-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="video-entrance" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-video-animation-param="entrance"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="video-entrance-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-video-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationFrom"}}</span><select name="video-entrance-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-video-animation-param="entrance" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="video-entrance-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-video-animation-param="entrance" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationInitialScale"}}</span><input type="number" name="video-entrance-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                  <section class="stagecraft-title-animation" data-stagecraft-video-animation="exit">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationOut"}}</h4>
+                    <div class="stagecraft-inspector-fields">
+                      <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="video-exit"><label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="video-exit-preset" data-stagecraft-video-motion-preset>
+                          <option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option>
+                          <option value="slide">{{localize "STAGECRAFT.Editor.AnimationSlide"}}</option><option value="fade-slide">{{localize "STAGECRAFT.Editor.AnimationFadeSlide"}}</option>
+                          <option value="zoom">{{localize "STAGECRAFT.Editor.AnimationZoomPreset"}}</option><option value="fade-zoom">{{localize "STAGECRAFT.Editor.AnimationFadeZoom"}}</option>
+                      </select></label></div>
+                      <label data-stagecraft-video-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationDuration"}}</span><input type="number" name="video-exit" min="0.001" max="600" step="any" required></label>
+                      <label data-stagecraft-video-animation-param="exit"><span>{{localize "STAGECRAFT.Editor.AnimationEasing"}}</span><select name="video-exit-easing">
+                          <option value="linear">{{localize "STAGECRAFT.Editor.EasingLinear"}}</option><option value="ease-in">{{localize "STAGECRAFT.Editor.EasingIn"}}</option>
+                          <option value="ease-out">{{localize "STAGECRAFT.Editor.EasingOut"}}</option><option value="ease-in-out">{{localize "STAGECRAFT.Editor.EasingInOut"}}</option>
+                          <option value="back-in">{{localize "STAGECRAFT.Editor.EasingBackIn"}}</option><option value="back-out">{{localize "STAGECRAFT.Editor.EasingBackOut"}}</option><option value="back-in-out">{{localize "STAGECRAFT.Editor.EasingBackInOut"}}</option>
+                      </select></label>
+                      <label data-stagecraft-video-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationTo"}}</span><select name="video-exit-direction">
+                          <option value="left">{{localize "STAGECRAFT.Editor.DirectionLeft"}}</option><option value="right">{{localize "STAGECRAFT.Editor.DirectionRight"}}</option><option value="up">{{localize "STAGECRAFT.Editor.DirectionUp"}}</option><option value="down">{{localize "STAGECRAFT.Editor.DirectionDown"}}</option>
+                      </select></label>
+                      <label data-stagecraft-video-animation-param="exit" data-stagecraft-animation-kind="slide"><span>{{localize "STAGECRAFT.Editor.AnimationDistance"}}</span><input type="number" name="video-exit-distance" min="0" max="32768" step="any" required></label>
+                      <label data-stagecraft-video-animation-param="exit" data-stagecraft-animation-kind="zoom"><span>{{localize "STAGECRAFT.Editor.AnimationFinalScale"}}</span><input type="number" name="video-exit-scale" min="5" max="400" step="any" required></label>
+                    </div>
+                  </section>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-video-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields">
+                  <label><span>{{localize "STAGECRAFT.Editor.Start"}}</span><input type="number" name="video-start" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.SourceIn"}}</span><input type="number" name="video-in" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.SourceOut"}}</span><input type="number" name="video-out" min="0.001" max="604800" step="any" required></label>
+                  <label class="stagecraft-checkbox stagecraft-wide" title="{{localize "STAGECRAFT.Editor.LoopWhileHeldHint"}}"><input type="checkbox" name="video-loop"><span>{{localize "STAGECRAFT.Editor.LoopWhileHeld"}}</span></label>
+                  <label data-stagecraft-break-behavior="video"><span>{{localize "STAGECRAFT.Editor.OnBreak"}}</span><select name="video-on-break"><option value="pause">{{localize "STAGECRAFT.Editor.BreakPause"}}</option><option value="loop">{{localize "STAGECRAFT.Editor.BreakLoop"}}</option><option value="finish">{{localize "STAGECRAFT.Editor.BreakFinish"}}</option></select></label>
+                </div>
+              </section>
+            </section>
+            <section class="stagecraft-element-panel" data-stagecraft-element-panel="audio" hidden>
+              <p class="stagecraft-element-empty" data-stagecraft-element-empty>{{localize "STAGECRAFT.Editor.ElementAbsent"}}</p>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="content" id="stagecraft-clip-audio-content" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-content" tabindex="0">
+                <div class="stagecraft-inspector-fields">
+                  <label class="stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.AudioFile"}}</span>
+                    <span class="stagecraft-file-field"><input type="text" name="audio-path" maxlength="2048" required autocomplete="off"><button type="button" data-stagecraft-action="choose-audio" aria-label="{{localize "STAGECRAFT.Editor.ChooseAudio"}}">{{localize "STAGECRAFT.Editor.Browse"}}</button></span>
+                  </label>
+                  <div class="stagecraft-metadata-row stagecraft-wide"><span>{{localize "STAGECRAFT.Editor.MediaDuration"}}</span><output data-stagecraft-audio-duration>{{localize "STAGECRAFT.Editor.MetadataMissing"}}</output><button type="button" data-stagecraft-action="inspect-audio">{{localize "STAGECRAFT.Editor.InspectAudio"}}</button></div>
+                  <label><span>{{localize "STAGECRAFT.Editor.AudioVolume"}}</span><input type="number" name="audio-volume" min="0" max="1" step="0.01" required></label>
+                  <label class="stagecraft-checkbox stagecraft-wide"><input type="checkbox" name="audio-muted"><span>{{localize "STAGECRAFT.Editor.MuteAudio"}}</span></label>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="animation" id="stagecraft-clip-audio-animation" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-animation" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields">
+                  <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="audio-entrance">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationIn"}}</h4>
+                    <label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="audio-entrance-preset" data-stagecraft-media-fade-preset><option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option></select></label>
+                  </div>
+                  <label><span>{{localize "STAGECRAFT.Editor.FadeIn"}}</span><input type="number" name="audio-entrance" min="0" max="600" step="any" required></label>
+                  <div class="stagecraft-wide stagecraft-text-animation-picker" data-stagecraft-element-animation-picker="audio-exit">
+                    <h4>{{localize "STAGECRAFT.Editor.AnimationOut"}}</h4>
+                    <label class="stagecraft-text-animation-select"><span>{{localize "STAGECRAFT.Editor.AnimationPreset"}}</span><select name="audio-exit-preset" data-stagecraft-media-fade-preset><option value="none">{{localize "STAGECRAFT.Editor.AnimationNone"}}</option><option value="fade">{{localize "STAGECRAFT.Editor.AnimationFade"}}</option></select></label>
+                  </div>
+                  <label><span>{{localize "STAGECRAFT.Editor.FadeOut"}}</span><input type="number" name="audio-exit" min="0" max="600" step="any" required></label>
+                </div>
+              </section>
+              <section class="stagecraft-clip-section-page" data-stagecraft-clip-section-page="timing" id="stagecraft-clip-audio-timing" role="tabpanel" aria-labelledby="stagecraft-clip-section-tab-timing" tabindex="0" hidden>
+                <div class="stagecraft-inspector-fields">
+                  <label><span>{{localize "STAGECRAFT.Editor.Start"}}</span><input type="number" name="audio-start" min="0" max="604800" step="any" required></label>
+                  <label data-stagecraft-audio-duration-mode="fixed"><span>{{localize "STAGECRAFT.Editor.AudioClipLength"}}</span><input type="number" name="audio-clip-duration" min="0.001" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.SourceIn"}}</span><input type="number" name="audio-in" min="0" max="604800" step="any" required></label>
+                  <label><span>{{localize "STAGECRAFT.Editor.SourceOut"}}</span><input type="number" name="audio-out" min="0.001" max="604800" step="any" required></label>
+                  <label class="stagecraft-checkbox stagecraft-wide" title="{{localize "STAGECRAFT.Editor.AudioLoopHint"}}"><input type="checkbox" name="audio-loop"><span>{{localize "STAGECRAFT.Editor.AudioLoop"}}</span></label>
+                  <label class="stagecraft-checkbox stagecraft-wide" title="{{localize "STAGECRAFT.Editor.AudioLoopIndefinitelyHint"}}"><input type="checkbox" name="audio-loop-indefinitely"><span>{{localize "STAGECRAFT.Editor.AudioLoopIndefinitely"}}</span></label>
+                  <label data-stagecraft-break-behavior="audio"><span>{{localize "STAGECRAFT.Editor.OnBreak"}}</span><select name="audio-on-break"><option value="pause">{{localize "STAGECRAFT.Editor.BreakPause"}}</option><option value="loop">{{localize "STAGECRAFT.Editor.BreakLoop"}}</option><option value="finish">{{localize "STAGECRAFT.Editor.BreakFinish"}}</option></select></label>
+                </div>
+              </section>
+            </section>
+            <details class="stagecraft-inspector-group" data-stagecraft-template-save-group>
+              <summary>{{localize "STAGECRAFT.Editor.TemplateSaveGroup"}}</summary>
+              <div data-stagecraft-template-save></div>
+            </details>
+          </section>
+        </section>
+        <section class="stagecraft-inspector-page" data-stagecraft-inspector-page="sequence" id="stagecraft-inspector-page-sequence" role="tabpanel" aria-labelledby="stagecraft-inspector-tab-sequence" tabindex="0" hidden>
+          <section class="stagecraft-inspector-section stagecraft-sequence-settings">
+            <fieldset class="stagecraft-sequence-setting-group">
+              <legend>{{localize "STAGECRAFT.Editor.SequenceEnding"}}</legend>
+              <div class="stagecraft-inspector-fields">
+                <label><span>{{localize "STAGECRAFT.Editor.Ending"}}</span><select name="ending"><option value="automatic">{{localize "STAGECRAFT.Editor.Automatic"}}</option><option value="fixed">{{localize "STAGECRAFT.Editor.Fixed"}}</option><option value="manual">{{localize "STAGECRAFT.Editor.Manual"}}</option><option value="media">{{localize "STAGECRAFT.Editor.EndWithMedia"}}</option></select></label>
+                <label data-stagecraft-ending-mode="media" hidden><span>{{localize "STAGECRAFT.Editor.EndMedia"}}</span><select name="end-media"></select></label>
+                <label data-stagecraft-ending-duration hidden><span data-stagecraft-duration-label>{{localize "STAGECRAFT.Editor.Duration"}}</span><input type="number" name="sequence-duration" min="0.001" max="604800" step="any" required></label>
+                <label><span>{{localize "STAGECRAFT.Editor.Exit"}}</span><input type="number" name="exit" min="0" max="600" step="any" required></label>
+              </div>
+              <div class="stagecraft-timing-errors" data-stagecraft-timing-errors role="alert" hidden></div>
+            </fieldset>
+            <fieldset class="stagecraft-sequence-setting-group">
+              <legend>{{localize "STAGECRAFT.Editor.Presentation"}}</legend>
+              <div data-stagecraft-presentation class="stagecraft-inspector-fields">
+                <label><span>{{localize "STAGECRAFT.Editor.Surface"}}</span><select name="surface"><option value="window">{{localize "STAGECRAFT.Editor.Window"}}</option><option value="canvas">{{localize "STAGECRAFT.Editor.Canvas"}}</option></select></label>
+                <label class="stagecraft-checkbox stagecraft-wide"><input type="checkbox" name="block-input"><span>{{localize "STAGECRAFT.Editor.BlockInput"}}</span></label>
+              </div>
+            </fieldset>
+            <details class="stagecraft-inspector-group stagecraft-trigger-settings-group" data-stagecraft-auto-trigger-group>
+              <summary>{{localize "STAGECRAFT.Editor.AutoTriggers"}}</summary>
+              <div data-stagecraft-trigger-settings></div>
+            </details>
+          </section>
+        </section>
+      </fieldset>
+    </aside>
+  </div>
+  <div class="stagecraft-splitter stagecraft-splitter-horizontal" data-stagecraft-splitter="timeline" role="separator" aria-orientation="horizontal" aria-label="{{localize 'STAGECRAFT.Editor.ResizeTimeline'}}" tabindex="0"></div>
+  <section class="stagecraft-timeline-panel" data-stagecraft-timeline aria-label="{{localize 'STAGECRAFT.Editor.Timeline'}}"></section>
+  <footer class="stagecraft-editor-footer">
+    <span data-stagecraft-message role="status" aria-live="polite"></span>
+    <span data-stagecraft-preview-state-error aria-live="assertive"></span>
+  </footer>
+</div>

@@ -1,0 +1,83 @@
+.stagecraft-timeline-panel { flex:0 0 var(--stagecraft-timeline-height,250px); min-height:0; border-top:1px solid var(--stagecraft-line); background:#171a20; display:flex; flex-direction:column; }
+.stagecraft-timeline-toolbar { display:flex; gap:8px; align-items:center; padding:8px 12px; flex-wrap:wrap; }
+.stagecraft-timeline-toolbar button { width:auto; min-width:0; flex:0 0 auto; }
+.stagecraft-timeline-toolbar select[data-timeline-track-add] { width:auto; min-width:136px; flex:0 0 auto; }
+.stagecraft-timeline-toolbar strong { margin-right:auto; }
+.stagecraft-timeline-toolbar input[type=range] { width:90px; }
+.stagecraft-timeline-toolbar input[data-timeline-scrub] { width:180px; }
+.stagecraft-timeline-scroll { flex:1; min-height:0; overflow:auto; position:relative; scroll-behavior:auto; overflow-anchor:none; }
+.stagecraft-timeline-content { position:relative; min-width:100%; padding-bottom:8px; }
+.stagecraft-break-lane-scroll { flex:0 0 38px; min-height:38px; overflow-x:auto; overflow-y:hidden; border-top:1px solid #55415f; background:#211b29; scrollbar-width:none; }
+.stagecraft-break-lane-scroll::-webkit-scrollbar { display:none; }
+.stagecraft-break-lane-content { position:relative; min-width:100%; height:37px; background:repeating-linear-gradient(90deg,#d78aff0b 0 1px,transparent 1px 80px); }
+.stagecraft-break-lane-heading { position:sticky; left:0; z-index:5; width:180px; height:37px; padding:9px 8px; border-right:1px solid #55415f; background:#30283a; color:#dfc7ee; font-size:11px; }
+.stagecraft-break-marker-area { position:absolute; top:0; right:0; bottom:0; left:180px; border-left:1px solid #55415f; }
+.stagecraft-time-ruler { position:sticky; top:0; z-index:6; height:30px; background:#171a20; border-bottom:1px solid var(--stagecraft-line); cursor:crosshair; touch-action:none; }
+.stagecraft-time-ruler span { position:absolute; top:0; height:100%; border-left:1px solid #6d7481; padding:3px 4px; color:var(--stagecraft-muted); font-size:11px; pointer-events:none; }
+.stagecraft-time-ruler-corner { position:sticky; left:0; z-index:2; width:180px; height:100%; padding:3px 6px; background:#252a32; color:var(--stagecraft-muted); font-size:11px; cursor:default; }
+.stagecraft-time-ruler .stagecraft-end-break-flag { position:absolute; top:3px; z-index:3; transform:translateX(-50%); box-sizing:border-box; width:18px; height:20px; padding:0; display:grid; place-items:center; border:1px solid #81d4d0; border-left:0; border-radius:3px; background:#183d43; color:#b8ffef; font-size:0; line-height:0; pointer-events:none; }
+.stagecraft-editor .stagecraft-playhead-handle { position:absolute; top:0; z-index:1; width:18px; min-width:18px; height:29px; min-height:0; margin:0; padding:0; transform:translateX(-50%); border:0; border-radius:0; background:transparent; cursor:ew-resize; touch-action:none; transition:none!important; }
+.stagecraft-playhead-handle::before { content:''; position:absolute; top:1px; left:3px; border-left:6px solid transparent; border-right:6px solid transparent; border-top:10px solid #f1bf70; }
+.stagecraft-editor .stagecraft-playhead-handle:focus-visible { outline:2px solid var(--stagecraft-accent); outline-offset:-2px; }
+.stagecraft-track-row { display:flex; min-height:56px; border-bottom:1px solid #303540; }
+.stagecraft-track-heading { position:sticky; left:0; z-index:5; width:180px; flex:0 0 180px; padding:4px 6px; background:#252a32; display:flex; flex-wrap:wrap; gap:3px; align-items:center; }
+.stagecraft-track-heading input { height:23px!important; font-size:11px!important; flex:1 0 100%; }
+.stagecraft-track-heading button { width:26px; min-width:0; flex:0 0 26px; min-height:22px; height:22px; margin:0; font-size:11px; padding:1px 3px; }
+.stagecraft-track-heading button[aria-pressed=true] { border-color:var(--stagecraft-accent); color:var(--stagecraft-accent); }
+.stagecraft-track-kind-icon { flex:0 0 18px; width:18px; color:#c894e6; text-align:center; font-size:11px; }
+.stagecraft-track-lane { flex:1; position:relative; min-width:0; background:repeating-linear-gradient(90deg,#ffffff04 0 1px,transparent 1px 80px); }
+.stagecraft-track-audio .stagecraft-track-heading { background:#30283a; }
+.stagecraft-audio-lane { background-color:#211b29; background-image:repeating-linear-gradient(90deg,#d4a8f008 0 1px,transparent 1px 80px); }
+.stagecraft-track-disabled .stagecraft-track-lane { opacity:.35; }
+.stagecraft-editor .stagecraft-timeline-clip { position:absolute; top:8px; height:38px; min-height:38px; display:flex; align-items:center; text-align:left; overflow:hidden; white-space:nowrap; padding:0 10px; touch-action:none; cursor:grab; border-radius:3px; background:#3a5867; border:1px solid #6d96a8; }
+.stagecraft-editor .stagecraft-clip-bars { background:#525464; border-color:#7c809b; }
+.stagecraft-editor .stagecraft-clip-text { background:#456957; border-color:#7fba98; }
+.stagecraft-editor .stagecraft-clip-audio { background:#593f68; border-color:#bb8bd4; }
+.stagecraft-editor .stagecraft-timeline-clip.active { outline:2px solid #e7f2f4; outline-offset:-2px; }
+.stagecraft-clip-label { position:relative; z-index:2; overflow:hidden; text-overflow:ellipsis; pointer-events:none; color:#f7f8fa; font-size:11px; padding-right:22px; text-shadow:0 1px 2px #000e; }
+.stagecraft-timeline-clip.stagecraft-breaks-enabled .stagecraft-clip-label { padding-right:24px; }
+.stagecraft-clip-fade { position:absolute; top:0; bottom:0; z-index:1; box-sizing:border-box; overflow:hidden; pointer-events:none; }
+.stagecraft-clip-fade-in { left:0; background:linear-gradient(90deg,#11161cc2 0%,#11161c60 58%,#11161c08 100%); }
+.stagecraft-clip-fade-out { right:0; background:linear-gradient(90deg,#11161c08 0%,#11161c60 42%,#11161cc2 100%); }
+.stagecraft-clip-fade::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,#ffe3a8e8,#fff3c9d6); pointer-events:none; }
+.stagecraft-clip-fade-in::before { clip-path:polygon(0 94%,0 100%,100% 6%,100% 0); }
+.stagecraft-clip-fade-out::before { clip-path:polygon(0 0,0 6%,100% 100%,100% 94%); }
+.stagecraft-clip-fade-in::after,.stagecraft-clip-fade-out::after { content:''; position:absolute; top:2px; bottom:2px; width:1px; background:#fff0bb; box-shadow:0 0 4px #ffe08bba; pointer-events:none; }
+.stagecraft-clip-fade-in::after { right:0; }
+.stagecraft-clip-fade-out::after { left:0; }
+.stagecraft-break-policy,.stagecraft-indefinite-badge { position:absolute; top:2px; z-index:2; width:10px; height:14px; padding:0; display:grid; place-items:center; border:1px solid #ffffff70; border-radius:3px; background:#18232ee8; color:#f8f6e8; font-size:8px; line-height:1; font-weight:700; pointer-events:auto; }
+.stagecraft-break-policy { right:2px; }
+.stagecraft-indefinite-badge { right:12px; color:#f2d27e; }
+.stagecraft-break-policy[data-break-policy=pause] { border-color:#aebdca; }
+.stagecraft-break-policy[data-break-policy=loop] { border-color:#9cddac; }
+.stagecraft-break-policy[data-break-policy=finish] { border-color:#f4bd8e; }
+.stagecraft-timeline-clip.stagecraft-media-state-paused .stagecraft-break-policy { color:#cfe6ff; }
+.stagecraft-timeline-clip.stagecraft-media-state-looping .stagecraft-break-policy { color:#9cffb5; }
+.stagecraft-timeline-clip.stagecraft-media-state-finishing .stagecraft-break-policy { color:#ffcf9f; }
+.stagecraft-timeline-clip.stagecraft-media-state-finished .stagecraft-break-policy { color:#c8d5dc; }
+.stagecraft-end-break-line { position:absolute; top:30px; bottom:0; z-index:1; width:2px; border-left:2px dashed #7ccfc7; opacity:.8; pointer-events:none; }
+.stagecraft-end-break-line.active { border-left-style:solid; border-left-color:#a4fff0; opacity:1; filter:drop-shadow(0 0 5px #73ffdd); }
+.stagecraft-end-break-flag.active { background:#297b79; border-color:#c6fff2; color:#fff; box-shadow:0 0 8px #62ffe0aa; }
+.stagecraft-inner-break-guide { position:absolute; top:30px; bottom:0; z-index:1; width:2px; border-left:2px dashed #ce82ef; opacity:.72; pointer-events:none; }
+.stagecraft-inner-break-guide.inactive { opacity:.3; }
+.stagecraft-inner-break-guide.invalid { border-left-color:#eb765f; opacity:1; }
+.stagecraft-inner-break-guide.active { border-left-style:solid; border-left-color:#ffe0ff; opacity:1; filter:drop-shadow(0 0 5px #eb8cff); }
+.stagecraft-editor .stagecraft-inner-break-marker { position:absolute; top:6px; z-index:2; width:22px; min-width:22px; height:24px; min-height:24px; margin:0; padding:0; transform:translateX(-50%); border:1px solid #d28aff; border-radius:4px; background:#382449; color:#f1d9ff; font-size:0; line-height:0; font-weight:700; cursor:grab; touch-action:none; transition:none!important; }
+.stagecraft-end-break-flag::before,.stagecraft-end-break-flag::after,.stagecraft-editor .stagecraft-inner-break-marker::before,.stagecraft-editor .stagecraft-inner-break-marker::after { content:''; position:absolute; top:50%; width:2px; height:9px; margin-top:-4.5px; border-radius:1px; background:currentColor; pointer-events:none; }
+.stagecraft-end-break-flag::before,.stagecraft-editor .stagecraft-inner-break-marker::before { left:calc(50% - 3px); }
+.stagecraft-end-break-flag::after,.stagecraft-editor .stagecraft-inner-break-marker::after { left:calc(50% + 1px); }
+.stagecraft-editor .stagecraft-inner-break-marker.inactive { border-style:dashed; opacity:.52; }
+.stagecraft-editor .stagecraft-inner-break-marker.selected { outline:2px solid #fff; outline-offset:1px; }
+.stagecraft-editor .stagecraft-inner-break-marker.stagecraft-invalid-gesture { border-color:#eb765f; background:#57291f; color:#ffe6dc; opacity:1; }
+.stagecraft-editor .stagecraft-inner-break-marker.active { border-color:#fff0ff; background:#963eb5; color:#fff; box-shadow:0 0 9px #ef9cff; opacity:1; }
+.stagecraft-editor .stagecraft-inner-break-marker:focus-visible { z-index:4; outline:2px solid var(--stagecraft-accent)!important; outline-offset:2px; }
+.stagecraft-clip-handle { position:absolute; top:0; bottom:0; z-index:3; width:8px; cursor:ew-resize; background:#ffffff1c; }
+.stagecraft-clip-handle[data-clip-edge=start] { left:0; }
+.stagecraft-clip-handle[data-clip-edge=end] { right:0; }
+.stagecraft-playhead { position:absolute; top:30px; bottom:0; width:2px; z-index:4; pointer-events:none; background:#f1bf70; }
+.stagecraft-invalid-gesture { opacity:.5; outline:2px solid #eb765f!important; }
+.stagecraft-selected-clip { display:flex; flex-wrap:wrap; align-items:center; gap:5px; padding:0 0 12px; }
+.stagecraft-selected-clip output { flex:1 0 100%; font-weight:600; }
+.stagecraft-editor .stagecraft-timeline-clip .stagecraft-clip-handle { pointer-events:auto!important; }
+/* Foundry animates buttons with a global transition. Timeline geometry must follow the pointer immediately. */
+.stagecraft-editor .stagecraft-timeline-clip { transition:none!important; }

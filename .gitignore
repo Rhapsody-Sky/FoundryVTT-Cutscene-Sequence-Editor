@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.test-*/
+artifacts/
+foundry-test-data/
+releases/
+release-assets/
+*.tsbuildinfo
+__pycache__/
+*.py[cod]
+.venv/

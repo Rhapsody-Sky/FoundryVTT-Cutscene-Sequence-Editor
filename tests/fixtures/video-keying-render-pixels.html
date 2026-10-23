@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Video key and blend pixel checks</title>
+<style>body{background:#19212a;color:#eee;font:16px system-ui;margin:24px}button{padding:12px}pre{white-space:pre-wrap}canvas{width:256px;height:64px;image-rendering:pixelated;margin:16px;border:1px solid #ddd}</style></head>
+<body><h1>Video key and blend pixel checks</h1><p>This isolated test uses generated pixels and never accesses Foundry or media files.</p>
+<button id="run">Run checks</button><pre id="result">Ready</pre><div id="samples"></div>
+<script>
+const fragment = __KEYING_FRAGMENT_SHADER__;
+const result = document.querySelector('#result');
+function close(actual, expected, label, tolerance=2){if(Math.abs(actual-expected)>tolerance)throw Error(label+': '+actual+' expected '+expected)}
+function alpha(rgb){const d=Math.hypot(rgb[0],rgb[1]-1,rgb[2])/Math.sqrt(3);const x=Math.max(0,Math.min(1,(d-.1)/.4));return x*x*(3-2*x)}
+function blend(b,s,mode){switch(mode){case'multiply':return b*s;case'screen':return b+s-b*s;case'overlay':return b<=.5?2*b*s:1-2*(1-b)*(1-s);case'difference':return Math.abs(b-s);default:return s}}
+document.querySelector('#run').onclick=()=>{
+  const checks=[];
+  try{
+    const canvas=document.createElement('canvas');canvas.width=4;canvas.height=1;
+    const gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:true,preserveDrawingBuffer:true,antialias:false});
+    if(!gl)throw Error('WebGL unavailable');
+    const p=gl.createProgram();
+    for(const [type,src]of [[gl.VERTEX_SHADER,'attribute vec2 position; varying vec2 uv; void main(){uv=(position+1.0)/2.0;gl_Position=vec4(position,0.0,1.0);}'],[gl.FRAGMENT_SHADER,fragment]]){
+      const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));gl.attachShader(p,s);
+    }
+    gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));gl.useProgram(p);
+    const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+    const pos=gl.getAttribLocation(p,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+    gl.bindTexture(gl.TEXTURE_2D,gl.createTexture());gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    const input=new Uint8Array([0,255,0,255,255,0,0,255,128,255,0,255,128,255,0,128]);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,4,1,0,gl.RGBA,gl.UNSIGNED_BYTE,input);gl.uniform1i(gl.getUniformLocation(p,'image'),0);gl.uniform3f(gl.getUniformLocation(p,'keyColor'),0,1,0);gl.uniform1f(gl.getUniformLocation(p,'tolerance'),.1);gl.uniform1f(gl.getUniformLocation(p,'softness'),.4);gl.viewport(0,0,4,1);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+    const pixels=new Uint8Array(16);gl.readPixels(0,0,4,1,gl.RGBA,gl.UNSIGNED_BYTE,pixels);
+    for(let i=0;i<4;i++){const rgb=[...input.slice(i*4,i*4+3)].map(v=>v/255);const a=alpha(rgb)*input[i*4+3]/255;for(let c=0;c<3;c++)close(pixels[i*4+c],rgb[c]*a*255,'shader premultiplied rgb '+i+'/'+c);close(pixels[i*4+3],a*255,'shader alpha '+i)}
+    checks.push({name:'actual GLSL key alpha, softness and premultiplication',passed:true,pixels:[...pixels]});
+    gl.uniform1f(gl.getUniformLocation(p,'softness'),0);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);gl.readPixels(0,0,4,1,gl.RGBA,gl.UNSIGNED_BYTE,pixels);close(pixels[3],0,'hard exact green');close(pixels[11],255,'hard surviving edge');checks.push({name:'zero softness hard edge',passed:true});
+    document.querySelector('#samples').replaceChildren(canvas);
+    const background=[51,102,153],source=[255,0,0],a=.4,fade=.5;
+    for(const mode of ['normal','multiply','screen','plus-lighter','overlay','difference']){
+      const group=document.createElement('canvas');group.width=group.height=1;const g=group.getContext('2d');g.fillStyle='rgb(51,102,153)';g.fillRect(0,0,1,1);g.globalCompositeOperation=mode==='normal'?'source-over':mode==='plus-lighter'?'lighter':mode;g.globalAlpha=a;g.fillStyle='red';g.fillRect(0,0,1,1);
+      const output=document.createElement('canvas');output.width=output.height=1;const o=output.getContext('2d');o.fillStyle='rgb(51,102,153)';o.fillRect(0,0,1,1);o.globalAlpha=fade;o.drawImage(group,0,0);const actual=o.getImageData(0,0,1,1).data;
+      for(let c=0;c<3;c++){const b=background[c]/255,s=source[c]/255;const r=mode==='plus-lighter'?Math.min(1,b+a*s):(1-a)*b+a*blend(b,s,mode);close(actual[c],255*((1-fade)*b+fade*r),mode+' clip alpha and group fade '+c)}
+      checks.push({name:mode+' native pixel blend with clip alpha and global fade',passed:true,pixels:[...actual]});
+    }
+    result.textContent=JSON.stringify({passed:true,checks},null,2);
+  }catch(error){result.textContent=JSON.stringify({passed:false,checks,error:String(error)},null,2)}
+};
+</script></body></html>
